@@ -89,4 +89,20 @@ public class PlayerMovement : MonoBehaviour
 		rb.gravityScale = 1;
 		Invoke ("AllowAscent", 2 * fallTime);	
 	}
+
+    void OnTriggerEnter2D(Collider2D _collider)
+    {
+        if (_collider.gameObject.tag == "RayOfLight")
+        {
+            BoostedAscent(true);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D _collider)
+    {
+        if (_collider.gameObject.tag == "RayOfLight")
+        {
+            BoostedAscent(false);
+        }
+    }
 }
