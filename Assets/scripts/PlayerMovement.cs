@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
 			Drop ();
 			doAscend = false;
 		}
+		if (Input.GetKeyDown (KeyCode.K))
+			FallPlayer ();
 
 		if (doBoost)
 			BoostedAscent (doBoost);
@@ -78,5 +80,13 @@ public class PlayerMovement : MonoBehaviour
 			doAscend = true;
 			doBoost = false;
 		}
+	}
+
+	public void FallPlayer()
+	{
+		doAscend = false;
+		rb.AddForce(new Vector2(0, fallSpeed));
+		rb.gravityScale = 1;
+		Invoke ("AllowAscent", 2 * fallTime);	
 	}
 }
