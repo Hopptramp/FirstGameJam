@@ -15,7 +15,7 @@ GameObject:
   - 61: {fileID: 6153296}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,9 @@ MonoBehaviour:
   leanSpeed: 10
   dropSpeed: -20
   fallSpeed: -10
+  boostedAscendSpeed: 5
   fallTime: 0.5
+  playerOne: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

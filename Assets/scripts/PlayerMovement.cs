@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
 	bool doAscend = true;
 	bool doBoost = false;
 
+	public bool playerOne = true; // Set as false from scene manager for player 2 when instantiating
+
 	Rigidbody2D rb;
 
 	// Use this for initialization
@@ -23,20 +25,20 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetKey(KeyCode.A))
+		if(Input.GetKey(playerOne ? KeyCode.A : KeyCode.J))
 		{
 			LeanDirection (-1);
 		}
-		else if(Input.GetKey(KeyCode.D))
+		else if(Input.GetKey(playerOne ? KeyCode.D : KeyCode.L))
 		{
 			LeanDirection (1);
 		}
-		if (Input.GetKeyDown (KeyCode.S)) 
+		if (Input.GetKeyDown (playerOne ? KeyCode.S : KeyCode.K)) 
 		{
 			Drop ();
 			doAscend = false;
 		}
-		if (Input.GetKeyDown (KeyCode.X))
+		if (Input.GetKeyDown (playerOne ? KeyCode.X : KeyCode.M))
 			FallPlayer ();
 
 		if (doBoost)
