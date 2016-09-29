@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour 
+public class PlayerMovement2 : MonoBehaviour 
 {
 	[SerializeField] float ascentSpeed = 0.25f;
 	[SerializeField] float leanSpeed = 10.0f;
@@ -23,20 +23,20 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetKey(KeyCode.A))
+		if(Input.GetKey(KeyCode.J))
 		{
 			LeanDirection (-1);
 		}
-		else if(Input.GetKey(KeyCode.D))
+		else if(Input.GetKey(KeyCode.L))
 		{
 			LeanDirection (1);
 		}
-		if (Input.GetKeyDown (KeyCode.S)) 
+		if (Input.GetKeyDown (KeyCode.K)) 
 		{
 			Drop ();
 			doAscend = false;
 		}
-		if (Input.GetKeyDown (KeyCode.X))
+		if (Input.GetKeyDown (KeyCode.M))
 			FallPlayer ();
 
 		if (doBoost)
