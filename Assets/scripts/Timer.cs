@@ -12,13 +12,14 @@ public class Timer : MonoBehaviour
 
     void OnGUI()
     {
+        GUI.color = Color.black;
         if (timeRemaining > 0)
         {
-            GUI.Label(new Rect(400, 0, 200, 100), "Time Remaining : " + (int)timeRemaining);
+            GUI.Label(new Rect(500, 35, 200, 100), "Time Remaining : " + (int)timeRemaining);
         }
         else
         {
-            GUI.Label(new Rect(400, 0, 200, 100), "Time's Up");
+            GUI.Label(new Rect(500, 35, 200, 100), "Time's Up");
         }
     }
 }
