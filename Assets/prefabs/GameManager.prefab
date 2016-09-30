@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 427914}
   - 114: {fileID: 11427700}
   - 114: {fileID: 11471494}
+  - 114: {fileID: 11499554}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40,7 +41,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde4e33ad926adb4e8ab707a1d25a98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 50
+  columns: 100
   rows: 300
   spaceBetween: 2
   barrierCount:
@@ -52,9 +53,10 @@ MonoBehaviour:
   OuterWall: {fileID: 178694, guid: b5776dd3586d74646858da93d64ac472, type: 2}
   barrier: {fileID: 130026, guid: 2479c9358b27d3148a5d909f0103c5e3, type: 2}
   lightRay: {fileID: 119762, guid: 744b36e1c0837a6498685c9d1ff23a13, type: 2}
-  player: {fileID: 114356, guid: 8cb3f6af2c10f2c40b6531599e76210f, type: 2}
+  player: {fileID: 165810, guid: 8cb3f6af2c10f2c40b6531599e76210f, type: 2}
   deathCollider: {fileID: 113856, guid: 39447c98c8bfcb24886f211bef311e10, type: 2}
   victoryCollider: {fileID: 176514, guid: 7fc28d416f687bd44b5e6fab178c90a2, type: 2}
+  EnemyManager: {fileID: 128342, guid: 89c392f12183747428b406e972455f38, type: 2}
 --- !u!114 &11471494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,6 +69,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelScript: {fileID: 0}
+--- !u!114 &11499554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9781f5a72fad0d04a953f413b3976f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

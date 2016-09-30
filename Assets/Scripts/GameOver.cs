@@ -3,9 +3,6 @@ using System.Collections;
 
 public class GameOver : MonoBehaviour {
 
-	public GameObject hell;
-	public GameObject heaven;
-
 	// Use this for initialization
 	void Start () {
 	
@@ -16,34 +13,29 @@ public class GameOver : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter2D(Collider2D other)
 	{
 		Debug.Log ("Trigger Entered");
 
-		if (other.tag == "DeathCollider") {
+		if (gameObject.tag == "DeathCollider") 
+		{
 
 			if (other.tag == "Bullet") 
 			{
 				Destroy (other.gameObject);
 			} 
-
-			if (other.tag == "Player") 
-			{
-				Debug.Log ("Player entered destroy collider");
+				
+			Debug.Log ("Player entered destroy collider");
 				//kill player
-			}
 
 		}
 
-		if (other.tag == "VictoryCollider") 
+		if (gameObject.tag == "VictoryCollider") 
 		{
-
-			if (other.tag == "Player") 
-			{
-				Debug.Log ("Player entered victory collider");
-				//victory to player
-			}
-
+			Debug.Log ("Player entered victory collider");
+			//victory to player
 		}
+			
 	}
+
 }
