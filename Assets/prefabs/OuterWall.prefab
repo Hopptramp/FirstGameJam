@@ -10,9 +10,10 @@ GameObject:
   - 4: {fileID: 495024}
   - 212: {fileID: 21261696}
   - 61: {fileID: 6128240}
+  - 61: {fileID: 6183110}
   m_Layer: 0
   m_Name: OuterWall
-  m_TagString: Enviroment
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,6 +44,20 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
+--- !u!61 &6183110
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178694}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 0.2}
 --- !u!212 &21261696
 SpriteRenderer:
   m_ObjectHideFlags: 1

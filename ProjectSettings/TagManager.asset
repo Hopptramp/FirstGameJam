@@ -11,6 +11,7 @@ TagManager:
   - Eniviroment
   - DeathCollider
   - VictoryCollider
+  - Wall
   layers:
   - Default
   - TransparentFX
