@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde4e33ad926adb4e8ab707a1d25a98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 100
+  columns: 50
   rows: 300
   spaceBetween: 2
   barrierCount:
