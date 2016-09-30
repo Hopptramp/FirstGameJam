@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
     public GameObject player;
 	public GameObject deathCollider;
 	public GameObject victoryCollider;
+    public GameObject EnemyManager;
 
     private Transform levelHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -133,7 +134,9 @@ public class LevelManager : MonoBehaviour
                 Vector3 newPosition = new Vector3(_currentPosition.x + x, _currentPosition.y + y, 0.0f);
                 if(newPosition.x >= 0 && newPosition.x <= columns)
                 {
-                    Instantiate(tile, newPosition, Quaternion.identity);
+                    GameObject instance = (GameObject)Instantiate(tile, newPosition, Quaternion.identity);
+
+                    instance.transform.SetParent(levelHolder);
                 }
             }
         }
@@ -150,6 +153,9 @@ public class LevelManager : MonoBehaviour
 
 		GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3 (0.0f, -5.5f, 0.0f), Quaternion.identity);
 		tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform;
-		Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity); 
+		Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity);
+        EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 10.0f, 0.0f));
+        EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 10.0f, 0.0f));
+        EnemyManager.GetComponent<EnemyManager>().initialiseEnemies();
     }
 }
