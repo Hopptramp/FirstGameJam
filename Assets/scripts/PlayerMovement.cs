@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour 
 {
@@ -10,16 +11,26 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] float boostedAscendSpeed = 5.0f;
 	[SerializeField] float fallTime = 0.5f;
 
+	[SerializeField] GameObject mainCam;
+	[SerializeField] GameObject collisionParticle;
+	[SerializeField] GameObject dropParticle;
+
+	List<GameObject> currentCollisionParticles;
+	List<GameObject> currentDropParticles;
+
+
 	//bool doAscend = true;
 	bool doBoost = false;
 
 	public bool playerOne = true; // Set as false from scene manager for player 2 when instantiating
-
 	Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
+
+		currentCollisionParticles = new List<GameObject> ();
+		currentDropParticles = new List<GameObject> ();
 	}
 	
 	// Update is called once per frame
@@ -48,6 +59,24 @@ public class PlayerMovement : MonoBehaviour
 		// if still in boost collider, keep applying boosted movement
 		if (doBoost)
 			BoostedAscent (doBoost);
+
+
+		if (currentCollisionParticles.Count > 0) {
+			for (int i = 0; i < currentCollisionParticles.Count; ++i) {
+				if (!currentCollisionParticles [i].GetComponent<ParticleSystem> ().IsAlive()) {
+					Destroy (currentCollisionParticles [i]);
+					currentCollisionParticles.RemoveAt (i--);
+				}
+				}
+		}
+		if (currentDropParticles.Count > 0) {
+			for (int i = 0; i < currentDropParticles.Count; ++i) {
+				if (!currentDropParticles [i].GetComponent<ParticleSystem> ().IsAlive()) {
+					Destroy (currentDropParticles [i]);
+					currentDropParticles.RemoveAt (i--);
+				}
+			}
+		}
 	}
 
 	void AllowAscent()
@@ -69,19 +98,24 @@ public class PlayerMovement : MonoBehaviour
 
 	void Drop()
 	{
+		GameObject particle = Instantiate (dropParticle) as GameObject;
+		particle.transform.position = transform.position;
+		currentDropParticles.Add (particle);
+
 		rb.AddForce(new Vector2(0, dropSpeed));
-		rb.gravityScale = 1;
+		rb.gravityScale = 2;
 		Invoke ("AllowAscent", fallTime);
 	}
 
 	public void BoostedAscent(bool active)
 	{
 		if (active) {
+
+
+			// apply force to the player
 			rb.AddForce (new Vector2 (rb.velocity.x, boostedAscendSpeed));
-			//doAscend = false;
 			doBoost = true;
 		} else {
-			//doAscend = true;
 			doBoost = false;
 		}
 	}
@@ -101,6 +135,14 @@ public class PlayerMovement : MonoBehaviour
             BoostedAscent(true);
         }
     }
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		mainCam.GetComponent<ScreenShake> ().ShakeScreen (0.1f);
+		GameObject particle = Instantiate (collisionParticle) as GameObject;
+		particle.transform.position = col.contacts [0].point;
+		currentCollisionParticles.Add (particle);
+	}
 
     void OnTriggerExit2D(Collider2D _collider)
     {

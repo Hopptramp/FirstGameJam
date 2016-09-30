@@ -8,10 +8,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457254}
-  - 212: {fileID: 21260684}
-  - 114: {fileID: 11448944}
-  - 50: {fileID: 5001152}
-  - 61: {fileID: 6129370}
+  - 212: {fileID: 21271534}
+  - 114: {fileID: 11458634}
+  - 50: {fileID: 5007138}
+  - 61: {fileID: 6162944}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Eniviroment
@@ -30,6 +30,7 @@ GameObject:
   - 20: {fileID: 2099214}
   - 124: {fileID: 12462544}
   - 92: {fileID: 9202270}
+  - 114: {fileID: 11403298}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -96,7 +97,7 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!50 &5001152
+--- !u!50 &5007138
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
@@ -113,7 +114,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6129370
+--- !u!61 &6162944
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -134,7 +135,20 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176548}
   m_Enabled: 1
---- !u!114 &11448944
+--- !u!114 &11403298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11854ec412f7c3469e7b5a127fa3f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testShakeStrength: 0.2
+  shakeDuration: 0.3
+--- !u!114 &11458634
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -151,6 +165,9 @@ MonoBehaviour:
   fallSpeed: -10
   boostedAscendSpeed: 7
   fallTime: 0.5
+  mainCam: {fileID: 176548}
+  collisionParticle: {fileID: 156246, guid: b32a8db3ea1b59442861e3c405f5aac6, type: 2}
+  dropParticle: {fileID: 179918, guid: 55d043d2d33bba643bcb897f3263e7ea, type: 2}
   playerOne: 1
 --- !u!124 &12462544
 Behaviour:
@@ -159,7 +176,7 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176548}
   m_Enabled: 1
---- !u!212 &21260684
+--- !u!212 &21271534
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
