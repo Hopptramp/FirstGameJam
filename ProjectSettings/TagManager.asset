@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Enviroment
+  - RayOfLight
+  - Eniviroment
+  - DeathCollider
+  - VictoryCollider
   layers:
   - Default
   - TransparentFX
