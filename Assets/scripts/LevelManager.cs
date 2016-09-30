@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
     public GameObject player;
 	public GameObject deathCollider;
 	public GameObject victoryCollider;
+    public GameObject EnemyManager;
 
     private Transform levelHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -151,6 +152,10 @@ public class LevelManager : MonoBehaviour
 		Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity);
 
         LayoutObjectAtRandom(barrier, barrierCount.minimum, barrierCount.maximum, 5, 2);
-        LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, 1, 10); 
+        LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, 1, 10);
+
+        EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 10.0f, 0.0f));
+        EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 10.0f, 0.0f));
+        EnemyManager.GetComponent<EnemyManager>().initialiseEnemies();
     }
 }
