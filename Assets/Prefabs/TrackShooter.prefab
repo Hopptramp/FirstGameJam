@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 128208, guid: 3955ae0d31c94c541861e87a020b2d59, type: 2}
-  player: {fileID: 165810, guid: 8cb3f6af2c10f2c40b6531599e76210f, type: 2}
+  player: {fileID: 0}
   flip: 0
 --- !u!212 &21262118
 SpriteRenderer:

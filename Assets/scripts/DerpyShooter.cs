@@ -81,11 +81,12 @@ public class DerpyShooter : MonoBehaviour
         }*/
     }
 
-    void OnCollisionEnter2D(Collision2D _collision)
+    void OnTriggerStay2D(Collider2D _collision)
     {
         
         if(_collision.gameObject.tag == "Wall")
         {
+            
             if(actualDirection == direction.left)
             {
                 actualDirection = direction.right;
