@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] float boostedAscendSpeed = 5.0f;
 	[SerializeField] float fallTime = 0.5f;
 
-	bool doAscend = true;
+	//bool doAscend = true;
 	bool doBoost = false;
 
 	public bool playerOne = true; // Set as false from scene manager for player 2 when instantiating
@@ -25,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if(Input.GetKey(playerOne ? KeyCode.W : KeyCode.I))
+		{
+			ConstantAscent ();
+		}
 		if(Input.GetKey(playerOne ? KeyCode.A : KeyCode.J))
 		{
 			LeanDirection (-1);
@@ -36,22 +40,20 @@ public class PlayerMovement : MonoBehaviour
 		if (Input.GetKeyDown (playerOne ? KeyCode.S : KeyCode.K)) 
 		{
 			Drop ();
-			doAscend = false;
+			//doAscend = false;
 		}
 		if (Input.GetKeyDown (playerOne ? KeyCode.X : KeyCode.M))
 			FallPlayer ();
 
+		// if still in boost collider, keep applying boosted movement
 		if (doBoost)
 			BoostedAscent (doBoost);
-		
-		if(doAscend)
-			ConstantAscent ();
 	}
 
 	void AllowAscent()
 	{
-		doAscend = true;
-		rb.gravityScale = 0; 
+		//doAscend = true;
+		rb.gravityScale = 0.25f; // set back to default gravity scale
 	}
 
 	void ConstantAscent()
@@ -76,17 +78,17 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (active) {
 			rb.AddForce (new Vector2 (rb.velocity.x, boostedAscendSpeed));
-			doAscend = false;
+			//doAscend = false;
 			doBoost = true;
 		} else {
-			doAscend = true;
+			//doAscend = true;
 			doBoost = false;
 		}
 	}
 
 	public void FallPlayer()
 	{
-		doAscend = false;
+		//doAscend = false;
 		rb.AddForce(new Vector2(0, fallSpeed));
 		rb.gravityScale = 1;
 		Invoke ("AllowAscent", 2 * fallTime);	
