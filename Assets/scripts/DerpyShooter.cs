@@ -108,7 +108,9 @@ public class DerpyShooter : MonoBehaviour
 
     void fire()
     {
-        Instantiate(bullet, transform.position, transform.rotation);
+        Vector3 firePort = transform.position;
+        firePort.y = firePort.y - 4;
+        Instantiate(bullet, firePort, Quaternion.identity);
     }
 
     void setSpeed(float setToSpeed)
