@@ -149,7 +149,7 @@ MonoBehaviour:
   leanSpeed: 5
   dropSpeed: -20
   fallSpeed: -10
-  boostedAscendSpeed: 7
+  boostedAscendSpeed: 14
   fallTime: 0.5
   playerOne: 1
 --- !u!124 &12406684
