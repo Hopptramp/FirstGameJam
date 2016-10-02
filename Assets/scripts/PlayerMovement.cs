@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetKey(playerOne ? KeyCode.W : KeyCode.I))
+		if(Input.GetKey(playerOne ? KeyCode.W : KeyCode.I) && !doBoost)
 		{
 			ConstantAscent ();
 		}
@@ -88,7 +88,10 @@ public class PlayerMovement : MonoBehaviour
 	void ConstantAscent()
 	{
 		//rb.AddForce (new Vector2 (0, ascentSpeed));
-		rb.velocity = new Vector2(rb.velocity.x, ascentSpeed);
+		if (rb.velocity.y > ascentSpeed)
+			rb.velocity = Vector2.Lerp (rb.velocity, new Vector2 (rb.velocity.x, ascentSpeed), 0.01f);
+		else
+			rb.velocity = new Vector2 (rb.velocity.x, ascentSpeed);
 	}
 
 	void LeanDirection(float input)
@@ -110,8 +113,6 @@ public class PlayerMovement : MonoBehaviour
 	public void BoostedAscent(bool active)
 	{
 		if (active) {
-
-
 			// apply force to the player
 			rb.AddForce (new Vector2 (rb.velocity.x, boostedAscendSpeed));
 			doBoost = true;
