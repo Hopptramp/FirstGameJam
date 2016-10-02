@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
     public GameObject OuterWall;
     public GameObject barrier;
     public GameObject lightRay;
+    public GameObject RayHolder;
     public GameObject player;
 	public GameObject deathCollider;
 	public GameObject victoryCollider;
@@ -126,6 +127,13 @@ public class LevelManager : MonoBehaviour
 
     void CreateClump(GameObject tile, Vector3 _currentPosition, int _width, int _height)
     {
+        if (tile == lightRay)
+        {
+            GameObject holder = Instantiate(RayHolder, new Vector3(_currentPosition.x, _currentPosition.y, 0.0f), Quaternion.identity) as GameObject;
+            holder.GetComponent<BoxCollider2D>().size = new Vector2(_width, _height);
+            holder.GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, (_height / 2) - 0.5f);
+        }
+
         for (int y = 0; y < _height; y++)
         {
             //Debug.Log("Loop!");

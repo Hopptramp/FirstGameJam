@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] float leanSpeed = 10.0f;
 	[SerializeField] float dropSpeed = -2.0f;
 	[SerializeField] float fallSpeed = -10.0f;
-	[SerializeField] float boostedAscendSpeed = 5.0f;
+	[SerializeField] float boostedAscendSpeed = 7.0f;
 	[SerializeField] float fallTime = 0.5f;
 
 	[SerializeField] GameObject mainCam;

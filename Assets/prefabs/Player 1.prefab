@@ -191,7 +191,7 @@ MonoBehaviour:
   leanSpeed: 5
   dropSpeed: -20
   fallSpeed: -10
-  boostedAscendSpeed: 7
+  boostedAscendSpeed: 14
   fallTime: 0.5
   mainCam: {fileID: 176548}
   collisionParticle: {fileID: 156246, guid: b32a8db3ea1b59442861e3c405f5aac6, type: 2}
