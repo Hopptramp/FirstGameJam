@@ -89,8 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72b52e0da5781742b73216adb1d2ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hell: {fileID: 0}
-  heaven: {fileID: 0}
+  m_gameManager: {fileID: 184600, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

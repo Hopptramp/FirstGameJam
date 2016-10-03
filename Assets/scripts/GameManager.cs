@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 
     public LevelManager levelScript;
     public STATE m_state;
-    public Text gameOverText;
+    public Canvas gameOverCanvasPrefab;
 
     //private int level = 3;
 
@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour {
 
         if (Application.loadedLevel == 0)
         {
-            Debug.Log(m_state);
             PlayerPrefs.SetInt("State", 0);
             m_state = STATE.PLAY;
         }
@@ -39,18 +38,6 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt("State", 0);
             levelScript = GetComponent<LevelManager>();
             InitGame();
-        }
-        else if (Application.loadedLevel == 2)
-        {
-            if (PlayerPrefs.GetInt("State") == 2)
-            {
-                gameOverText.text = "You Win";
-            }
-            else
-            {
-                gameOverText.text = "You lose";
-            }
-            Instantiate(gameOverText, Vector3.zero, Quaternion.identity);
         }
     }
 
@@ -64,7 +51,7 @@ public class GameManager : MonoBehaviour {
     {
         if (Application.loadedLevel == 0)
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 Application.LoadLevel(1);
             }
@@ -77,11 +64,28 @@ public class GameManager : MonoBehaviour {
                 PlayerPrefs.SetInt("State", 1);
                 Application.LoadLevel(2);
             }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Application.LoadLevel(0);
+            }
+        }
 
+        if (Application.loadedLevel != 3)
+        {
             if (m_state == STATE.Win)
             {
                 PlayerPrefs.SetInt("State", 2);
-                Application.LoadLevel(2);
+                Application.LoadLevel(3);
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Application.LoadLevel(0);
             }
         }
     }
