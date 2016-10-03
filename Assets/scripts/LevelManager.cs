@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject deathCollider;
 	public GameObject victoryCollider;
     public GameObject EnemyManager;
+    public Camera MainCamera;
 
     private Transform levelHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -132,6 +133,7 @@ public class LevelManager : MonoBehaviour
             GameObject holder = Instantiate(RayHolder, new Vector3(_currentPosition.x, _currentPosition.y, 0.0f), Quaternion.identity) as GameObject;
             holder.GetComponent<BoxCollider2D>().size = new Vector2(_width, _height);
             holder.GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, (_height / 2) - 0.5f);
+            holder.transform.SetParent(levelHolder);
         }
 
         for (int y = 0; y < _height; y++)
@@ -142,7 +144,9 @@ public class LevelManager : MonoBehaviour
                 Vector3 newPosition = new Vector3(_currentPosition.x + x, _currentPosition.y + y, 0.0f);
                 if(newPosition.x >= 0 && newPosition.x <= columns)
                 {
-                    Instantiate(tile, newPosition, Quaternion.identity);
+                    GameObject instance = Instantiate(tile, newPosition, Quaternion.identity) as GameObject;
+
+                    instance.transform.SetParent(levelHolder);
                 }
             }
         }
@@ -154,16 +158,17 @@ public class LevelManager : MonoBehaviour
         LevelSetup();
         InitialiseList();
         Instantiate(player, new Vector3((columns / 2) - 1.0f, 1.0f, 0.0f), Quaternion.identity);
+        Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 1.0f, -30.0f), Quaternion.identity);
 
-		//GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3 (0.0f, -5.5f, 0.0f), Quaternion.identity);
-		//tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; //BREAKS CODE OF GAME MANAGER
-		Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity);
+        GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3((columns / 2) - 1.0f, -30.0f, 0.0f), Quaternion.identity);
+        tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; //BREAKS CODE OF GAME MANAGER
+        Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity);
 
         LayoutObjectAtRandom(barrier, barrierCount.minimum, barrierCount.maximum, 5, 2);
         LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, 1, 10);
 
-        EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 10.0f, 0.0f));
-        EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 10.0f, 0.0f));
+        EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 20.0f, 0.0f));
+        EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 20.0f, 0.0f));
         EnemyManager.GetComponent<EnemyManager>().initialiseEnemies();
     }
 }
