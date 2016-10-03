@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TrackShooter : Enemy
 {
-    [SerializeField]private float drag = 10.0f;
+    [SerializeField]private float drag = 400.0f;
 
     // Update is called once per frame
     void Update()
