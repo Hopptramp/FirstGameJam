@@ -25,7 +25,9 @@ public class EnemyManager : MonoBehaviour {
     public void initialiseEnemies()
     {
         derpyShooter = (GameObject)Instantiate(derpyShooterRef, startPositionDerpy, gameObject.transform.rotation);
+        derpyShooter.gameObject.transform.parent = Camera.main.gameObject.transform;
         trackShooter = (GameObject)Instantiate(trackShooterRef, startPositionTrack, gameObject.transform.rotation);
+        trackShooter.gameObject.transform.parent = Camera.main.gameObject.transform;
     }
 
     public void setDerpyShooterPosition(Vector3 newPosition)

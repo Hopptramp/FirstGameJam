@@ -4,15 +4,9 @@ using System.Collections;
 public class CameraScript : MonoBehaviour {
     
     public Camera gameCamera;
-    private float speed;
+    public float speed;
     Vector3 newPosition;
 
-    // Use this for initialization
-    void Start ()
-    {
-        setSpeed(1.0f);
-        gameCamera.orthographic = true;
-	}
 	
 	// Update is called once per frame
 	void Update ()
