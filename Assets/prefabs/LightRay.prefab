@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21294700}
   - 61: {fileID: 6191404}
   - 114: {fileID: 11422774}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LightRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
