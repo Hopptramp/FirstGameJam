@@ -13,12 +13,14 @@ public class CameraScript : MonoBehaviour {
 
 	void Start()
 	{
-		players = new List<GameObject> ();
+		
 	}
 
 	public void AddToList(GameObject player)
 	{
-		players.Add (player);
+        if(players == null)
+            players = new List<GameObject>();
+        players.Add (player);
 	}
 	
 	// Update is called once per frame
@@ -36,8 +38,8 @@ public class CameraScript : MonoBehaviour {
 			Vector3 newPosition = new Vector3 (0, speed, 0);
 			gameCamera.transform.Translate (newPosition * Time.deltaTime);
 
-			if (avgHeight > transform.position.y)
-				transform.position = Vector3.Lerp (transform.position, new Vector3 (0, avgHeight), 0.2f);
+			if (avgHeight > transform.position.y + 10)
+				transform.position = Vector3.Lerp (transform.position, new Vector3 (transform.position.x, avgHeight, transform.position.z), 0.01f);
 		}
 	}
 
