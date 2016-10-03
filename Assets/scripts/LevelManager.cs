@@ -21,8 +21,14 @@ public class LevelManager : MonoBehaviour
     public int columns = 30;
     public int rows = 200;
     public int spaceBetween = 2;
+
     public Count barrierCount = new Count(20, 25);
+    public Count barrierSizeX = new Count(5, 10);
+    public Count barrierSizeY = new Count(2, 4);
     public Count lightCount = new Count(10, 15);
+    public Count LightSizeX = new Count(2, 4);
+    public Count LightSizeY = new Count(5, 10);
+
     public GameObject OuterWall;
     public GameObject barrier;
     public GameObject lightRay;
@@ -115,14 +121,16 @@ public class LevelManager : MonoBehaviour
     //    return true;
     //}
 
-    void LayoutObjectAtRandom(GameObject tile, int minimum, int maximum, int _height, int _width)
+    void LayoutObjectAtRandom(GameObject tile, int minimum, int maximum, int _heightMin, int _heightMax, int _widthMin, int _widthMax)
     {
         int objectCount = Random.Range(minimum, maximum + 1);
 
         for (int i = 0; i < objectCount; i++)
         {
+            int objectHeight = Random.Range(_heightMin, _heightMax);
+            int objectWidth = Random.Range(_widthMin, _widthMax);
             Vector3 randomPosition = RandomPosition();
-            CreateClump(tile, randomPosition, _height, _width);
+            CreateClump(tile, randomPosition, objectHeight, objectWidth);
         }
     }
 
@@ -162,10 +170,12 @@ public class LevelManager : MonoBehaviour
 
         GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3((columns / 2) - 1.0f, -30.0f, 0.0f), Quaternion.identity);
         tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; //BREAKS CODE OF GAME MANAGER
-        Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity);
+        tempDeathCollider.GetComponent<GameOver>().setup(gameObject);
+        GameObject tempWinCollider = (GameObject)Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity);
+        tempWinCollider.GetComponent<GameOver>().setup(gameObject);
 
-        LayoutObjectAtRandom(barrier, barrierCount.minimum, barrierCount.maximum, 5, 2);
-        LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, 1, 10);
+        LayoutObjectAtRandom(barrier, barrierCount.minimum, barrierCount.maximum, barrierSizeX.minimum, barrierSizeX.maximum, barrierSizeY.minimum, barrierSizeY.maximum);
+        LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, LightSizeX.minimum, LightSizeX.maximum, LightSizeY.minimum, LightSizeY.maximum);
 
         EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 20.0f, 0.0f));
         EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 10.0f, 0.0f));

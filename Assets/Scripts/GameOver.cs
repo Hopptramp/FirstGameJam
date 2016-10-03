@@ -6,10 +6,15 @@ public class GameOver : MonoBehaviour {
     public GameObject m_gameManager;
     private GameManager m_gameManagerScript;
 
+    public void setup(GameObject _gameManager)
+    {
+        m_gameManagerScript = _gameManager.GetComponent<GameManager>();
+    }
+
 	// Use this for initialization
 	void Awake ()
     {
-        m_gameManagerScript = m_gameManager.GetComponent<GameManager>();
+       // m_gameManagerScript = m_gameManager.GetComponent<GameManager>();
 	}
 	
 	// Update is called once per frame
@@ -33,18 +38,15 @@ public class GameOver : MonoBehaviour {
                 m_gameManagerScript.m_state = GameManager.STATE.GAMEOVER;
                 Debug.Log("Player entered destroy collider");
             }
-			
-            	
-			
-				//kill player
 
 		}
 
 		if (gameObject.tag == "VictoryCollider") 
 		{
 			Debug.Log ("Player entered victory collider");
-			//victory to player
-		}
+            m_gameManagerScript.m_state = GameManager.STATE.Win;
+            //victory to player
+        }
 			
 	}
 
