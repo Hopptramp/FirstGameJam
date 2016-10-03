@@ -140,7 +140,7 @@ public class LevelManager : MonoBehaviour
         {
             GameObject holder = Instantiate(RayHolder, new Vector3(_currentPosition.x, _currentPosition.y, 0.0f), Quaternion.identity) as GameObject;
             holder.GetComponent<BoxCollider2D>().size = new Vector2(_width, _height);
-            holder.GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, (_height / 2) - 0.5f);
+            holder.GetComponent<BoxCollider2D>().offset = new Vector2(1.5f, (_height / 2) - 0.5f);
             holder.transform.SetParent(levelHolder);
         }
 
