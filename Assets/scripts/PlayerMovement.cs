@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
 	//bool doAscend = true;
 	bool doBoost = false;
+    bool canAscend = true;
 
 	public bool playerOne = true; // Set as false from scene manager for player 2 when instantiating
 	Rigidbody2D rb;
@@ -86,15 +87,19 @@ public class PlayerMovement : MonoBehaviour
 	{
 		//doAscend = true;
 		rb.gravityScale = 0.25f; // set back to default gravity scale
+        canAscend = true;
 	}
 
 	void ConstantAscent()
 	{
-		//rb.AddForce (new Vector2 (0, ascentSpeed));
-		if (rb.velocity.y > ascentSpeed)
-			rb.velocity = Vector2.Lerp (rb.velocity, new Vector2 (rb.velocity.x, ascentSpeed), 0.01f);
-		else
-			rb.velocity = new Vector2 (rb.velocity.x, ascentSpeed);
+        if (canAscend)
+        {
+            //rb.AddForce (new Vector2 (0, ascentSpeed));
+            if (rb.velocity.y > ascentSpeed)
+                rb.velocity = Vector2.Lerp(rb.velocity, new Vector2(rb.velocity.x, ascentSpeed), 0.01f);
+            else
+                rb.velocity = new Vector2(rb.velocity.x, ascentSpeed);
+        }
 	}
 
 	void LeanDirection(float input)
@@ -104,11 +109,14 @@ public class PlayerMovement : MonoBehaviour
 
 	void Drop()
 	{
+        canAscend = false;
 		GameObject particle = Instantiate (dropParticle) as GameObject;
 		particle.transform.position = transform.position;
 		currentDropParticles.Add (particle);
 
+        
 		rb.AddForce(new Vector2(0, dropSpeed));
+        rb.velocity = new Vector2(rb.velocity.x / 4, rb.velocity.y);
 		rb.gravityScale = 2;
 		Invoke ("AllowAscent", fallTime);
 	}
@@ -126,17 +134,23 @@ public class PlayerMovement : MonoBehaviour
 
 	public void FallPlayer()
 	{
-		//doAscend = false;
-		rb.AddForce(new Vector2(0, fallSpeed));
+        canAscend = false;
+        //doAscend = false;
+        rb.AddForce(new Vector2(0, fallSpeed));
 		rb.gravityScale = 1;
 		Invoke ("AllowAscent", 2 * fallTime);	
 	}
 
     void OnTriggerEnter2D(Collider2D _collider)
     {
-        if (_collider.gameObject.tag == "RayOfLight")
+        if (_collider.tag == "RayOfLight")
         {
             BoostedAscent(true);
+        }
+        else if (_collider.tag == "Bullet")
+        {
+            FallPlayer();
+            Destroy(_collider.gameObject);
         }
     }
 
@@ -150,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D _collider)
     {
-        if (_collider.gameObject.tag == "RayOfLight")
+        if (_collider.tag == "RayOfLight")
         {
             BoostedAscent(false);
         }
