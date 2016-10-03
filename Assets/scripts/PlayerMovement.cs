@@ -114,8 +114,8 @@ public class PlayerMovement : MonoBehaviour
 		particle.transform.position = transform.position;
 		currentDropParticles.Add (particle);
 
-        
-		rb.AddForce(new Vector2(0, - Mathf.Abs(rb.velocity.y) + Mathf.Abs(dropSpeed)));
+        rb.velocity = Vector2.zero;
+		rb.AddForce(new Vector2(0, - (Mathf.Abs(rb.velocity.y) + Mathf.Abs(dropSpeed))));
         rb.velocity = new Vector2(rb.velocity.x / 4, rb.velocity.y);
 		rb.gravityScale = 2;
 		Invoke ("AllowAscent", fallTime);
