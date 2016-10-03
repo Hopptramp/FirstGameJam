@@ -7,13 +7,11 @@ public class DerpyShooter : MonoBehaviour
     
     public GameObject bullet;
 
-    float boundLeft = -100.0f;
-    float boundRight = 100.0f;
-
-    private float shotTimer = 0.0f;
+    private int shotTimer = 0;
     private float speed;
     private Rigidbody2D _rb;
     public bool flip;
+    int timeToShoot;
 
     enum direction //enum which controls direction of derpyshooter
     {
@@ -27,6 +25,7 @@ public class DerpyShooter : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         flip = true;
+        timeToShoot = 200;
     }
 
     // Update is called once per frame
@@ -41,7 +40,7 @@ public class DerpyShooter : MonoBehaviour
                 setSpeed(1.0f);
                 Vector3 newPosition = new Vector3(getSpeed(), 0, 0);
 
-                _rb.AddForce(newPosition * Time.deltaTime * 5000.0f);
+                _rb.AddForce(newPosition * Time.deltaTime * 25000.0f);
                 //transform.Translate(newPosition * Time.deltaTime);
             }
             else if (actualDirection == direction.left) //move right
@@ -49,7 +48,7 @@ public class DerpyShooter : MonoBehaviour
                 setSpeed(-1.0f);
                 Vector3 newPosition = new Vector3(getSpeed(), 0, 0);
 
-                _rb.AddForce(newPosition * Time.deltaTime * 5000.0f);
+                _rb.AddForce(newPosition * Time.deltaTime * 25000.0f);
                 //transform.Translate(newPosition * Time.deltaTime);
             }
             else
@@ -59,11 +58,16 @@ public class DerpyShooter : MonoBehaviour
             flip = false;
         }
 
-        if (getTimer() == 200.0f) //shoot
+        if (getTimer() == timeToShoot) //shoot
         {
             // Debug.Log("Pew");
-            setTimer(0.0f);
+            setTimer(0);
+            
             fire();
+            if (timeToShoot != 5)
+            {
+                timeToShoot = timeToShoot - 5;
+            }
         }
 
        /* if (transform.position.x <= boundLeft) //bounce off the left
@@ -123,12 +127,12 @@ public class DerpyShooter : MonoBehaviour
         return speed;
     }
 
-    void setTimer(float timerToSet)
+    void setTimer(int timerToSet)
     {
         shotTimer = timerToSet;
     }
 
-    float getTimer()
+    int getTimer()
     {
         return shotTimer;
     }

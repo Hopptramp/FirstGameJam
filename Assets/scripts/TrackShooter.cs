@@ -39,7 +39,14 @@ public class TrackShooter : MonoBehaviour
                 setSpeed(1.0f);
                 Vector3 newPosition = new Vector3(getSpeed(), 0, 0);
 
-                _rb.AddForce(newPosition * Time.deltaTime * 500.0f);
+                Vector3 worldDir = newPosition.normalized;
+
+                Vector3 localDir = transform.InverseTransformDirection(worldDir);
+
+                newPosition += 400.0f * Time.deltaTime * worldDir;
+
+                _rb.AddForce(newPosition * Time.deltaTime * 400.0f);
+                _rb.drag = (400.0f * Time.deltaTime);
                 //transform.Translate(newPosition * Time.deltaTime);
             }
             else if (actualDirection == direction.left) //move right
@@ -47,7 +54,14 @@ public class TrackShooter : MonoBehaviour
                 setSpeed(-1.0f);
                 Vector3 newPosition = new Vector3(getSpeed(), 0, 0);
 
-                _rb.AddForce(newPosition * Time.deltaTime * 500.0f);
+                Vector3 worldDir = newPosition.normalized;
+
+                Vector3 localDir = transform.InverseTransformDirection(worldDir);
+
+                newPosition += 400.0f * Time.deltaTime * worldDir;
+
+                _rb.AddForce(newPosition * Time.deltaTime * 400.0f);
+                _rb.drag = (400.0f * Time.deltaTime);
                 //transform.Translate(newPosition * Time.deltaTime);
             }
             else
