@@ -53,4 +53,22 @@ public class bulletscript : MonoBehaviour {
     {
         deathTimer = timerToSet;
     }
+
+    public void BulletHit()
+    {
+        ParticleSystem[] particles = new ParticleSystem[2];
+        particles = GetComponentsInChildren<ParticleSystem>(); 
+
+        for (int i = 0; i < particles.Length; ++i)
+        { 
+            particles[i].Stop();
+        }
+
+        Invoke("DestroySelf", 2);
+    }
+
+    void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 }

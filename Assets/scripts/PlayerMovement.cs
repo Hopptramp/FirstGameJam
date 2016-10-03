@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
         else if (_collider.tag == "Bullet")
         {
             FallPlayer();
-            Destroy(_collider.gameObject);
+            _collider.gameObject.GetComponent<bulletscript>().BulletHit();
         }
     }
 
