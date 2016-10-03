@@ -168,7 +168,7 @@ public class LevelManager : MonoBehaviour
         LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, 1, 10);
 
         EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 20.0f, 0.0f));
-        EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 20.0f, 0.0f));
+        EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 10.0f, 0.0f));
         EnemyManager.GetComponent<EnemyManager>().initialiseEnemies();
     }
 }
