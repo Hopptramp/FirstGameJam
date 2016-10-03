@@ -71,6 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelScript: {fileID: 0}
+  m_state: 0
+  gameOverText: {fileID: 11479794, guid: faf3178969ac4fe43bff9f83991369bd, type: 2}
 --- !u!114 &11499554
 MonoBehaviour:
   m_ObjectHideFlags: 1
