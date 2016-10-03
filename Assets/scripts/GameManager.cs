@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -9,8 +10,11 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        levelScript = GetComponent<LevelManager>();
-        InitGame();
+        if(Application.loadedLevel == 1)
+        {
+            levelScript = GetComponent<LevelManager>();
+            InitGame();
+        } 
 	}
 
     void InitGame()
@@ -18,8 +22,15 @@ public class GameManager : MonoBehaviour {
         levelScript.SetupScene();
     }
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        if (Application.loadedLevel == 0)
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                Application.LoadLevel(1);
+            }
+        }
+    }
 }
