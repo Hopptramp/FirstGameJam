@@ -26,6 +26,14 @@ public class bulletscript : MonoBehaviour {
         }
 	}
 
+    void OnCollisionEnter2D(Collision2D _collision)
+    {
+        if(_collision.gameObject.tag == "Enemy")
+        {
+            Physics2D.IgnoreCollision(_collision.collider, GetComponent<Collider2D>());
+        }
+    }
+
     void setSpeed(float speedToSet)
     {
         speed = speedToSet;
