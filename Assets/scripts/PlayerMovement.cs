@@ -31,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
 
 		currentCollisionParticles = new List<GameObject> ();
 		currentDropParticles = new List<GameObject> ();
+		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
+
+		mainCam.GetComponent<CameraScript> ().AddToList (gameObject);
 	}
 	
 	// Update is called once per frame

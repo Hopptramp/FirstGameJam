@@ -4,11 +4,13 @@ using System.Collections;
 public class ScreenShake : MonoBehaviour {
 
 	float shakeAmt;
-	Camera mainCamera;
+	public Camera mainCamera;
 	Vector3 originalCameraPosition;
 
 	[SerializeField] float testShakeStrength = 0.2f;
 	[SerializeField] float shakeDuration = 0.3f;
+
+	public bool isShaking = false;
 
 	void Start()
 	{
@@ -24,9 +26,11 @@ public class ScreenShake : MonoBehaviour {
 
 	public void ShakeScreen(float? shakeSize)
 	{
+		originalCameraPosition = transform.position;
 		shakeAmt = shakeSize.HasValue ? (float)shakeSize : testShakeStrength;
 		InvokeRepeating ("CameraShake", 0, .01f);
 		Invoke ("StopShaking", shakeDuration);
+		isShaking = true;
 	}
 
 	void CameraShake()
@@ -44,7 +48,8 @@ public class ScreenShake : MonoBehaviour {
 	void StopShaking()
 	{
 		CancelInvoke("CameraShake");
-		mainCamera.transform.localPosition = Vector3.Lerp(mainCamera.transform.localPosition, new Vector3(0,0,-20), 1);
+		mainCamera.transform.localPosition = Vector3.Lerp(mainCamera.transform.localPosition, originalCameraPosition, 1);
+		isShaking = false;
 	}
 
 }
