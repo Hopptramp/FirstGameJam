@@ -155,7 +155,7 @@ public class LevelManager : MonoBehaviour
         InitialiseList();
         Instantiate(player, new Vector3((columns / 2) - 1.0f, 1.0f, 0.0f), Quaternion.identity);
 
-		GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3 (0.0f, -5.5f, 0.0f), Quaternion.identity);
+		//GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3 (0.0f, -5.5f, 0.0f), Quaternion.identity);
 		//tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; //BREAKS CODE OF GAME MANAGER
 		Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity);
 

@@ -53,6 +53,7 @@ MonoBehaviour:
   OuterWall: {fileID: 178694, guid: b5776dd3586d74646858da93d64ac472, type: 2}
   barrier: {fileID: 130026, guid: 2479c9358b27d3148a5d909f0103c5e3, type: 2}
   lightRay: {fileID: 119762, guid: 744b36e1c0837a6498685c9d1ff23a13, type: 2}
+  RayHolder: {fileID: 110630, guid: 0d499453ce164f343bde163a95cf747d, type: 2}
   player: {fileID: 114356, guid: 8cb3f6af2c10f2c40b6531599e76210f, type: 2}
   deathCollider: {fileID: 113856, guid: 39447c98c8bfcb24886f211bef311e10, type: 2}
   victoryCollider: {fileID: 176514, guid: 7fc28d416f687bd44b5e6fab178c90a2, type: 2}
