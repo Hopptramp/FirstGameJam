@@ -19,7 +19,7 @@ public class SideDerpyShooter : Enemy
         {
             if (actualDirection == direction.right) //move left
             {
-                setSpeed(10000.0f);
+                setSpeed(40000.0f);
                 Vector3 newPosition = new Vector3(0, getSpeed(), 0);
 
                 _rb.AddForce(newPosition * Time.deltaTime);
@@ -27,7 +27,7 @@ public class SideDerpyShooter : Enemy
             }
             else if (actualDirection == direction.left) //move right
             {
-                setSpeed(-10000.0f);
+                setSpeed(-40000.0f);
                 Vector3 newPosition = new Vector3(0, getSpeed(), 0);
 
                 _rb.AddForce(newPosition * Time.deltaTime);
@@ -69,7 +69,7 @@ public class SideDerpyShooter : Enemy
     {
         //Debug.Log("boop");
 
-        if (_collision.gameObject.tag == "Cieling")
+        if (_collision.gameObject.tag == "Cieling" || _collision.gameObject.tag == "DeathCollider")
         {
             
 
