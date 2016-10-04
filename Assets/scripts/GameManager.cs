@@ -16,26 +16,20 @@ public class GameManager : MonoBehaviour {
 
     public LevelManager levelScript;
     public STATE m_state;
-    public Canvas gameOverCanvasPrefab;
+    public int winScore = 3;
 
     //private int level = 3;
 
 	// Use this for initialization
 	void Awake ()
     {
-        if (!PlayerPrefs.HasKey("State"))
-        {
-            PlayerPrefs.SetInt("State", 0);
-        }
-
         if (Application.loadedLevel == 0)
         {
-            PlayerPrefs.SetInt("State", 0);
+            ResetPlayerPrefs();
             m_state = STATE.PLAY;
         }
         else if (Application.loadedLevel == 1)
         {
-            PlayerPrefs.SetInt("State", 0);
             levelScript = GetComponent<LevelManager>();
             InitGame();
         }
@@ -61,8 +55,16 @@ public class GameManager : MonoBehaviour {
         {
             if (m_state == STATE.WIN1)
             {
-                PlayerPrefs.SetInt("State", 1);
-                Application.LoadLevel(2);
+                if (PlayerPrefs.GetInt("Player1Score") == winScore)
+                {
+                    PlayerPrefs.SetInt("State", 1);
+                    Application.LoadLevel(2);
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("Player1Score", PlayerPrefs.GetInt("Player1Score") + 1);
+                    Application.LoadLevel(1);
+                }
             }
         }
         else
@@ -77,8 +79,16 @@ public class GameManager : MonoBehaviour {
         {
             if (m_state == STATE.WIN2)
             {
-                PlayerPrefs.SetInt("State", 2);
-                Application.LoadLevel(3);
+                if (PlayerPrefs.GetInt("Player2Score") == winScore)
+                {
+                    PlayerPrefs.SetInt("State", 2);
+                    Application.LoadLevel(3);
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("Player2Score", PlayerPrefs.GetInt("Player2Score") + 1);
+                    Application.LoadLevel(1);
+                }
             }
         }
         else
@@ -88,5 +98,27 @@ public class GameManager : MonoBehaviour {
                 Application.LoadLevel(0);
             }
         }
+    }
+
+    void ResetPlayerPrefs()
+    {
+        if (!PlayerPrefs.HasKey("State"))
+        {
+            PlayerPrefs.DeleteKey("State");
+        }
+        if (!PlayerPrefs.HasKey("Player1Score"))
+        {
+            PlayerPrefs.DeleteKey("Player1Score");
+        }
+        if (!PlayerPrefs.HasKey("Player2Score"))
+        {
+            PlayerPrefs.DeleteKey("Player2Score");
+        }
+        
+        
+        PlayerPrefs.SetInt("State", 0);
+        PlayerPrefs.SetInt("Player1Score", 1);
+        PlayerPrefs.SetInt("Player2Score", 1);
+
     }
 }
