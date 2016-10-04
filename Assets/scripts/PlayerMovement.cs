@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] float leanSpeed = 10.0f;
 	[SerializeField] float dropSpeed = -2.0f;
 	[SerializeField] float fallSpeed = -10.0f;
-	[SerializeField] float boostedAscendSpeed = 7.0f;
+	[SerializeField] float boostedAscendSpeed = 2.0f;
 	[SerializeField] float fallTime = 1.0f;
     [SerializeField] float dropTime = 0.5f;
 
@@ -41,10 +41,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       // if (Input.GetKey(playerOne ? KeyCode.W : KeyCode.I) && !doBoost)
-       // {
+        if (Input.GetKey(playerOne ? KeyCode.W : KeyCode.I) && !doBoost)
+        {
             ConstantAscent();
-        //}
+        }
         if (Input.GetKey(playerOne ? KeyCode.A : KeyCode.J))
         {
             LeanDirection(-1);
@@ -184,7 +184,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (col.gameObject.tag == "Mine")
         {
-            Drop();
+            FallPlayer();
             col.transform.parent.GetComponent<DestroyChildren>().DestroyTheChildren();
             
         }
