@@ -48,6 +48,12 @@ public class LevelManager : MonoBehaviour
     Camera myCam;
 
     ParticleSystem[] fireParticles;
+	public AudioSource Fire;
+
+	void update()
+	{
+		GetComponent<AudioSource>().Play();
+	}
 
     private Transform levelHolder;
     private Transform barrierHolder;
@@ -180,6 +186,7 @@ public class LevelManager : MonoBehaviour
         {
             for (int i = 0; i < fireParticles.Length; ++i)
             {
+				Destroy (Fire);
                 fireParticles[i].Stop();
             }
         }
