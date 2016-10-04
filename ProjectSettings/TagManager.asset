@@ -12,6 +12,7 @@ TagManager:
   - DeathCollider
   - VictoryCollider
   - Wall
+  - Mine
   layers:
   - Default
   - TransparentFX

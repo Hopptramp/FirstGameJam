@@ -27,12 +27,14 @@ public class LevelManager : MonoBehaviour
     public Count lightCount = new Count(10, 15);
     public Count LightSizeX = new Count(2, 4);
     public Count LightSizeY = new Count(5, 10);
+    public Count mineCount = new Count(20, 25);
     public float minimumBlockHeight = 10;
 
     public GameObject OuterWall;
     public GameObject barrier;
     public GameObject lightRay;
     public GameObject RayHolder;
+    public GameObject mine;
     public GameObject player;
 	public GameObject deathCollider;
 	public GameObject victoryCollider;
@@ -133,9 +135,11 @@ public class LevelManager : MonoBehaviour
     {
         LevelSetup();
         InitialiseList();
-        Instantiate(player, new Vector3((columns / 2) - 6.0f, 30.0f, 0.0f), Quaternion.identity);
+        GameObject player1 = (GameObject)Instantiate(player, new Vector3((columns / 2) - 6.0f, 30.0f, 0.0f), Quaternion.identity);
+        player1.gameObject.name = "Player 1";
         GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) + 6.0f, 30.0f, 0.0f), Quaternion.identity);
         player2.GetComponent<PlayerMovement>().playerOne = false;
+        player2.gameObject.name = "Player 2";
         Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity);
 
         GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3((columns / 2) - 1.0f, 0.0f, 0.0f), Quaternion.identity);
@@ -146,6 +150,7 @@ public class LevelManager : MonoBehaviour
 
         LayoutObjectAtRandom(barrier, barrierCount.minimum, barrierCount.maximum, barrierSizeX.minimum, barrierSizeX.maximum, barrierSizeY.minimum, barrierSizeY.maximum);
         LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, LightSizeX.minimum, LightSizeX.maximum, LightSizeY.minimum, LightSizeY.maximum);
+        LayoutObjectAtRandom(mine, mineCount.minimum, mineCount.maximum, 1, 1, 1, 1);
 
         EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 50.0f, 0.0f));
         EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 40.0f, 0.0f));
