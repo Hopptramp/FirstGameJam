@@ -117,7 +117,7 @@ MonoBehaviour:
   victoryCollider: {fileID: 176514, guid: 7fc28d416f687bd44b5e6fab178c90a2, type: 2}
   EnemyManager: {fileID: 128342, guid: 89c392f12183747428b406e972455f38, type: 2}
   SideEnemeies: {fileID: 187170, guid: 500cee9ac5d81434e82b97cde5a9dabb, type: 2}
-  MainCamera: {fileID: 2037692, guid: 4fe43567d02488640a6de25ce42eb4c0, type: 2}
+  MainCamera: {fileID: 178984, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
 --- !u!114 &11471494
 MonoBehaviour:
   m_ObjectHideFlags: 1

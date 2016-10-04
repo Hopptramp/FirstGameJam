@@ -125,13 +125,16 @@ public class LevelManager : MonoBehaviour
     {
         Transform holder = new GameObject(tile.name + "holder").transform;
         holder.transform.SetParent(levelHolder);
+        holder.transform.position = _currentPosition;
 
         if (tile == lightRay)
         {
             holder.gameObject.AddComponent<BoxCollider2D>();
+            holder.GetComponent<BoxCollider2D>().isTrigger = true;
             holder.GetComponent<BoxCollider2D>().size = new Vector2(_width, _height);
             holder.GetComponent<BoxCollider2D>().offset = new Vector2(1.5f, (_height / 2) - 0.5f);
             holder.transform.SetParent(lightHolder);
+            holder.gameObject.tag = "RayOfLight";
         }
         else if(tile == barrier)
         {
@@ -196,7 +199,8 @@ public class LevelManager : MonoBehaviour
         GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) + 6.0f, 30.0f, 0.0f), Quaternion.identity);
         player2.GetComponent<PlayerMovement>().playerOne = false;
         player2.gameObject.name = "Player 2";
-        GameObject cam = Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity) as GameObject;
+        player2.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color(0.0f, 255.0f, 33.0f);
+        GameObject cam = Instantiate(MainCamera, new Vector3((columns / 2) - 0.5f, 30.0f, -30.0f), Quaternion.identity) as GameObject;
         myCam = cam.GetComponentInChildren<Camera>();
 
         fireParticles = new ParticleSystem[50];
@@ -210,17 +214,11 @@ public class LevelManager : MonoBehaviour
 
         LayoutObjectAtRandom(barrier, barrierCount.minimum, barrierCount.maximum, barrierSizeX.minimum, barrierSizeX.maximum, barrierSizeY.minimum, barrierSizeY.maximum);
         LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, LightSizeX.minimum, LightSizeX.maximum, LightSizeY.minimum, LightSizeY.maximum);
-        LayoutObjectAtRandom(mine, mineCount.minimum, mineCount.maximum, 4, 4, 4, 4);
+        LayoutObjectAtRandom(mine, mineCount.minimum, mineCount.maximum, 2, 2, 2, 2);
 
         EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 50.0f, 0.0f));
-        EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 40.0f, 0.0f));
+        EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 50.0f, 0.0f));
         EnemyManager.GetComponent<EnemyManager>().initialiseEnemies();
-        GameObject enemy1 = (GameObject)Instantiate(SideEnemeies, new Vector3(10.0f, 20.0f, 0.0f), Quaternion.identity);
-        enemy1.GetComponent<SideDerpyShooter>().setSide(true);
-        enemy1.transform.SetParent(Camera.main.gameObject.transform);
-        GameObject enemy2 = (GameObject)Instantiate(SideEnemeies, new Vector3(columns - 10.0f, 20.0f, 0.0f), Quaternion.identity);
-        enemy2.GetComponent<SideDerpyShooter>().setSide(true);
-        enemy2.transform.SetParent(Camera.main.gameObject.transform);
     }
 
 
