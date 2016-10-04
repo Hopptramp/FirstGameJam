@@ -21,33 +21,29 @@ public class LevelManager : MonoBehaviour
     public int columns = 30;
     public int rows = 200;
 
-    [SerializeField]
-    Gradient backgroundColour;
-
     public Count barrierCount = new Count(20, 25);
     public Count barrierSizeX = new Count(5, 10);
     public Count barrierSizeY = new Count(2, 4);
     public Count lightCount = new Count(10, 15);
     public Count LightSizeX = new Count(2, 4);
     public Count LightSizeY = new Count(5, 10);
-    public Count mineCount = new Count(10, 15);
+    public Count mineCount = new Count(20, 25);
     public float minimumBlockHeight = 10;
 
     public GameObject OuterWall;
     public GameObject barrier;
     public GameObject lightRay;
-    public GameObject RayHolder;
-   public GameObject mine;
+    public GameObject mine;
     public GameObject player;
 	public GameObject deathCollider;
 	public GameObject victoryCollider;
     public GameObject EnemyManager;
     public Camera MainCamera;
-    Camera myCam;
-
-    ParticleSystem[] fireParticles;
 
     private Transform levelHolder;
+    private Transform barrierHolder;
+    private Transform lightHolder;
+    private Transform mineHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
 
     void InitialiseList()
@@ -66,6 +62,14 @@ public class LevelManager : MonoBehaviour
     void LevelSetup()
     {
         levelHolder = new GameObject("Level").transform;
+        barrierHolder = new GameObject("Barrier").transform;
+        barrierHolder.transform.SetParent(levelHolder);
+        lightHolder = new GameObject("Light").transform;
+        lightHolder.transform.SetParent(levelHolder);
+        mineHolder = new GameObject("Mine").transform;
+        mineHolder.transform.SetParent(levelHolder);
+        Transform wallHolder = new GameObject("wallHolder").transform;
+        wallHolder.transform.SetParent(levelHolder);
 
         for (int x = -1; x < columns + 1; x++)
         {
@@ -76,7 +80,7 @@ public class LevelManager : MonoBehaviour
                     GameObject toInstantiate = OuterWall;
                     GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0.0f), Quaternion.identity) as GameObject;
 
-                    instance.transform.SetParent(levelHolder);
+                    instance.transform.SetParent(wallHolder);
                 }
             }
         }
@@ -112,13 +116,26 @@ public class LevelManager : MonoBehaviour
 
     void CreateClump(GameObject tile, Vector3 _currentPosition, int _width, int _height)
     {
+        Transform holder = new GameObject(tile.name + "holder").transform;
+        holder.transform.SetParent(levelHolder);
+
         if (tile == lightRay)
         {
-            GameObject holder = Instantiate(RayHolder, new Vector3(_currentPosition.x, _currentPosition.y, 0.0f), Quaternion.identity) as GameObject;
+            holder.gameObject.AddComponent<BoxCollider2D>();
             holder.GetComponent<BoxCollider2D>().size = new Vector2(_width, _height);
             holder.GetComponent<BoxCollider2D>().offset = new Vector2(1.5f, (_height / 2) - 0.5f);
-            holder.transform.SetParent(levelHolder);
+            holder.transform.SetParent(lightHolder);
         }
+        else if(tile == barrier)
+        {
+            holder.transform.SetParent(barrierHolder);
+        }
+        else if (tile == mine)
+        {
+            holder.transform.SetParent(mineHolder);
+            holder.gameObject.AddComponent<DestroyChildren>();
+        }
+
 
         for (int y = 0; y < _height; y++)
         {
@@ -130,27 +147,8 @@ public class LevelManager : MonoBehaviour
                 {
                     GameObject instance = Instantiate(tile, newPosition, Quaternion.identity) as GameObject;
 
-                    instance.transform.SetParent(levelHolder);
+                    instance.transform.SetParent(holder);
                 }
-            }
-        }
-    }
-
-    void Update()
-    {
-        UpdateCamBackground();
-    }
-
-    void UpdateCamBackground()
-    {
-        float avgPercentage = myCam.GetComponent<CameraScript>().avgPercentage;
-        myCam.backgroundColor = backgroundColour.Evaluate(avgPercentage);
-
-        if (avgPercentage > 0.8f)
-        {
-            for (int i = 0; i < fireParticles.Length; ++i)
-            {
-                fireParticles[i].Stop();
             }
         }
     }
@@ -165,10 +163,7 @@ public class LevelManager : MonoBehaviour
         GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) + 6.0f, 30.0f, 0.0f), Quaternion.identity);
         player2.GetComponent<PlayerMovement>().playerOne = false;
         player2.gameObject.name = "Player 2";
-        myCam = Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity) as Camera;
-
-        fireParticles = new ParticleSystem[50];
-        fireParticles = myCam.GetComponentsInChildren<ParticleSystem>();
+        Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity);
 
         GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3((columns / 2) - 1.0f, 0.0f, 0.0f), Quaternion.identity);
         tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; 
@@ -178,7 +173,7 @@ public class LevelManager : MonoBehaviour
 
         LayoutObjectAtRandom(barrier, barrierCount.minimum, barrierCount.maximum, barrierSizeX.minimum, barrierSizeX.maximum, barrierSizeY.minimum, barrierSizeY.maximum);
         LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, LightSizeX.minimum, LightSizeX.maximum, LightSizeY.minimum, LightSizeY.maximum);
- 	LayoutObjectAtRandom(mine, mineCount.minimum, mineCount.maximum, 1, 1, 1, 1);
+        LayoutObjectAtRandom(mine, mineCount.minimum, mineCount.maximum, 4, 4, 4, 4);
 
         EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 50.0f, 0.0f));
         EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 40.0f, 0.0f));
