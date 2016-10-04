@@ -363,6 +363,10 @@ Prefab:
       propertyPath: player2Score
       value: 
       objectReference: {fileID: 95166111}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: MainCamera
+      value: 
+      objectReference: {fileID: 178984, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
   m_IsPrefabParent: 0
@@ -589,7 +593,6 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
