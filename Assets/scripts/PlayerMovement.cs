@@ -162,6 +162,11 @@ public class PlayerMovement : MonoBehaviour
 		GameObject particle = Instantiate (collisionParticle) as GameObject;
 		particle.transform.position = col.contacts [0].point;
 		currentCollisionParticles.Add (particle);
+
+        if(col.gameObject.tag == "Enemy")
+        {
+            FallPlayer();
+        }
 	}
 
     void OnTriggerExit2D(Collider2D _collider)

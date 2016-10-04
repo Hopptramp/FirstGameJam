@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11487516}
   - 61: {fileID: 6198566}
   - 50: {fileID: 5054022}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: TrackShooter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 401996}
   - 212: {fileID: 21276194}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
