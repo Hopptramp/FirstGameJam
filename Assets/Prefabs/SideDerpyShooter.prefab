@@ -11,9 +11,9 @@ GameObject:
   - 61: {fileID: 6103446}
   - 50: {fileID: 5070814}
   - 114: {fileID: 11449840}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SideDerpyShooter
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 429586}
   - 212: {fileID: 21245636}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
