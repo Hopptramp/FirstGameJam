@@ -21,6 +21,9 @@ public class LevelManager : MonoBehaviour
     public int columns = 30;
     public int rows = 200;
 
+    [SerializeField]
+    Gradient backgroundColour;
+
     public Count barrierCount = new Count(20, 25);
     public Count barrierSizeX = new Count(5, 10);
     public Count barrierSizeY = new Count(2, 4);
@@ -38,6 +41,9 @@ public class LevelManager : MonoBehaviour
 	public GameObject victoryCollider;
     public GameObject EnemyManager;
     public Camera MainCamera;
+    Camera myCam;
+
+    ParticleSystem[] fireParticles;
 
     private Transform levelHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -128,6 +134,25 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        UpdateCamBackground();
+    }
+
+    void UpdateCamBackground()
+    {
+        float avgPercentage = myCam.GetComponent<CameraScript>().avgPercentage;
+        myCam.backgroundColor = backgroundColour.Evaluate(avgPercentage);
+
+        if (avgPercentage > 0.8f)
+        {
+            for (int i = 0; i < fireParticles.Length; ++i)
+            {
+                fireParticles[i].Stop();
+            }
+        }
+    }
+
 
     public void SetupScene()
     {
@@ -136,7 +161,10 @@ public class LevelManager : MonoBehaviour
         Instantiate(player, new Vector3((columns / 2) - 6.0f, 30.0f, 0.0f), Quaternion.identity);
         GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) + 6.0f, 30.0f, 0.0f), Quaternion.identity);
         player2.GetComponent<PlayerMovement>().playerOne = false;
-        Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity);
+        myCam = Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity) as Camera;
+
+        fireParticles = new ParticleSystem[50];
+        fireParticles = myCam.GetComponentsInChildren<ParticleSystem>();
 
         GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3((columns / 2) - 1.0f, 0.0f, 0.0f), Quaternion.identity);
         tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; 

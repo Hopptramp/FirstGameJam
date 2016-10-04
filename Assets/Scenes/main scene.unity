@@ -164,6 +164,74 @@ Prefab:
       propertyPath: LightSizeX.maximum
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.key0.rgba
+      value: 4278190095
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.key1.rgba
+      value: 4278190142
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.key2.rgba
+      value: 3234706
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.ctime1
+      value: 8674
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.ctime2
+      value: 19661
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.m_NumColorKeys
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.key3.rgba
+      value: 7373451
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.ctime3
+      value: 31804
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.key4.rgba
+      value: 10980962
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.ctime4
+      value: 43176
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.key5.rgba
+      value: 6658463
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.ctime5
+      value: 52814
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.key6.rgba
+      value: 5546437
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.ctime6
+      value: 61102
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.key7.rgba
+      value: 15066597
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.ctime7
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: backgroundColour.ctime0
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
   m_IsPrefabParent: 0

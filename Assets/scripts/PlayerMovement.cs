@@ -37,54 +37,65 @@ public class PlayerMovement : MonoBehaviour
 
 		mainCam.GetComponent<CameraScript> ().AddToList (gameObject);
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if(Input.GetKey(playerOne ? KeyCode.W : KeyCode.I) && !doBoost)
-		{
-			ConstantAscent ();
-		}
-		if(Input.GetKey(playerOne ? KeyCode.A : KeyCode.J))
-		{
-			LeanDirection (-1);
-		}
-		else if(Input.GetKey(playerOne ? KeyCode.D : KeyCode.L))
-		{
-			LeanDirection (1);
-		}
-		if (Input.GetKeyDown (playerOne ? KeyCode.S : KeyCode.K)) 
-		{
-			Drop ();
-			//doAscend = false;
-		}
-		if (Input.GetKeyDown (playerOne ? KeyCode.X : KeyCode.M))
-			FallPlayer ();
 
-		// if still in boost collider, keep applying boosted movement
-		if (doBoost)
-			BoostedAscent (doBoost);
+    // Update is called once per frame
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (Input.GetKey(playerOne ? KeyCode.W : KeyCode.I) && !doBoost)
+        {
+            ConstantAscent();
+        }
+        if (Input.GetKey(playerOne ? KeyCode.A : KeyCode.J))
+        {
+            LeanDirection(-1);
+        }
+        else if (Input.GetKey(playerOne ? KeyCode.D : KeyCode.L))
+        {
+            LeanDirection(1);
+        }
+        if (Input.GetKeyDown(playerOne ? KeyCode.S : KeyCode.K))
+        {
+            Drop();
+            //doAscend = false;
+        }
+        if (Input.GetKeyDown(playerOne ? KeyCode.X : KeyCode.M))
+            FallPlayer();
+
+        // if still in boost collider, keep applying boosted movement
+        if (doBoost)
+            BoostedAscent(doBoost);
+
+    }
+
+    void Update()
+    {
+        if (currentCollisionParticles.Count > 0)
+        {
+            for (int i = 0; i < currentCollisionParticles.Count; ++i)
+            {
+                if (!currentCollisionParticles[i].GetComponent<ParticleSystem>().IsAlive())
+                {
+                    Destroy(currentCollisionParticles[i]);
+                    currentCollisionParticles.RemoveAt(i--);
+                }
+            }
+        }
+        if (currentDropParticles.Count > 0)
+        {
+            for (int i = 0; i < currentDropParticles.Count; ++i)
+            {
+                if (!currentDropParticles[i].GetComponent<ParticleSystem>().IsAlive())
+                {
+                    Destroy(currentDropParticles[i]);
+                    currentDropParticles.RemoveAt(i--);
+                }
+            }
+        }
+    }
 
 
-		if (currentCollisionParticles.Count > 0) {
-			for (int i = 0; i < currentCollisionParticles.Count; ++i) {
-				if (!currentCollisionParticles [i].GetComponent<ParticleSystem> ().IsAlive()) {
-					Destroy (currentCollisionParticles [i]);
-					currentCollisionParticles.RemoveAt (i--);
-				}
-				}
-		}
-		if (currentDropParticles.Count > 0) {
-			for (int i = 0; i < currentDropParticles.Count; ++i) {
-				if (!currentDropParticles [i].GetComponent<ParticleSystem> ().IsAlive()) {
-					Destroy (currentDropParticles [i]);
-					currentDropParticles.RemoveAt (i--);
-				}
-			}
-		}
-	}
-
-	void AllowAscent()
+    void AllowAscent()
 	{
 		//doAscend = true;
 		rb.gravityScale = 0.25f; // set back to default gravity scale
