@@ -232,6 +232,10 @@ Prefab:
       propertyPath: backgroundColour.ctime0
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11427700, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
+      propertyPath: mine
+      value: 
+      objectReference: {fileID: 148792, guid: b9a6819e759820c46955eea56d7fcccc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb84b4eb0d984d04a8d3b0f3182936e6, type: 2}
   m_IsPrefabParent: 0
