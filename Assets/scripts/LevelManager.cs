@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
     public Count lightCount = new Count(10, 15);
     public Count LightSizeX = new Count(2, 4);
     public Count LightSizeY = new Count(5, 10);
+    public Count mineCount = new Count(10, 15);
     public float minimumBlockHeight = 10;
 
     public GameObject OuterWall;
