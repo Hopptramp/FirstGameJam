@@ -20,7 +20,6 @@ public class LevelManager : MonoBehaviour
 
     public int columns = 30;
     public int rows = 200;
-    public int spaceBetween = 2;
 
     public Count barrierCount = new Count(20, 25);
     public Count barrierSizeX = new Count(5, 10);
@@ -165,8 +164,8 @@ public class LevelManager : MonoBehaviour
     {
         LevelSetup();
         InitialiseList();
-        Instantiate(player, new Vector3((columns / 2) - 1.0f, 1.0f, 0.0f), Quaternion.identity);
-        GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) - 1.0f, 1.0f, 0.0f), Quaternion.identity);
+        Instantiate(player, new Vector3((columns / 2) - 6.0f, 1.0f, 0.0f), Quaternion.identity);
+        GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) + 6.0f, 1.0f, 0.0f), Quaternion.identity);
         player2.GetComponent<PlayerMovement>().playerOne = false;
         Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 1.0f, -30.0f), Quaternion.identity);
 
