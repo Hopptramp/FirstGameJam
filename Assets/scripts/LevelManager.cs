@@ -40,6 +40,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject deathCollider;
 	public GameObject victoryCollider;
     public GameObject EnemyManager;
+    public GameObject SideEnemeies;
     public Camera MainCamera;
 
     Camera myCam;
@@ -193,7 +194,6 @@ public class LevelManager : MonoBehaviour
         fireParticles = new ParticleSystem[50];
         fireParticles = myCam.GetComponentsInChildren<ParticleSystem>();
 
-
         GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3((columns / 2) - 1.0f, 0.0f, 0.0f), Quaternion.identity);
         tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; 
         tempDeathCollider.GetComponent<GameOver>().setup(gameObject);
@@ -207,6 +207,12 @@ public class LevelManager : MonoBehaviour
         EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 50.0f, 0.0f));
         EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 40.0f, 0.0f));
         EnemyManager.GetComponent<EnemyManager>().initialiseEnemies();
+        GameObject enemy1 = (GameObject)Instantiate(SideEnemeies, new Vector3(10.0f, 20.0f, 0.0f), Quaternion.identity);
+        enemy1.GetComponent<SideDerpyShooter>().setSide(true);
+        enemy1.transform.SetParent(Camera.main.gameObject.transform);
+        GameObject enemy2 = (GameObject)Instantiate(SideEnemeies, new Vector3(columns - 10.0f, 20.0f, 0.0f), Quaternion.identity);
+        enemy2.GetComponent<SideDerpyShooter>().setSide(true);
+        enemy2.transform.SetParent(Camera.main.gameObject.transform);
     }
 
 

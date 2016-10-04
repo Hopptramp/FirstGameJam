@@ -3,7 +3,7 @@ using System.Collections;
 
 public class bulletscript : MonoBehaviour {
 
-    float speed = 4.0f;
+    float speed = -4.0f;
     public float deathTimer = 0.0f;
 
 	// Use this for initialization
