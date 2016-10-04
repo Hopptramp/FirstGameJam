@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour {
 			{
 				Application.LoadLevel(4);
 			}
+
+            if(Input.GetKeyDown(KeyCode.Y))
+            {
+                PlayerPrefs.SetInt("HardMode", 1);
+            }
         }
 
         if (Application.loadedLevel != 2)
@@ -149,11 +154,15 @@ public class GameManager : MonoBehaviour {
         {
             PlayerPrefs.DeleteKey("Player2Score");
         }
-        
-        
+        if (!PlayerPrefs.HasKey("HardMode"))
+        {
+            PlayerPrefs.DeleteKey("HardMode");
+        }
+
+
         PlayerPrefs.SetInt("State", 0);
         PlayerPrefs.SetInt("Player1Score", 0);
         PlayerPrefs.SetInt("Player2Score", 0);
-
+        PlayerPrefs.SetInt("HardMode", 0);
     }
 }
