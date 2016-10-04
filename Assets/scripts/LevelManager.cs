@@ -166,10 +166,12 @@ public class LevelManager : MonoBehaviour
         LevelSetup();
         InitialiseList();
         Instantiate(player, new Vector3((columns / 2) - 1.0f, 1.0f, 0.0f), Quaternion.identity);
+        GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) - 1.0f, 1.0f, 0.0f), Quaternion.identity);
+        player2.GetComponent<PlayerMovement>().playerOne = false;
         Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 1.0f, -30.0f), Quaternion.identity);
 
         GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3((columns / 2) - 1.0f, -30.0f, 0.0f), Quaternion.identity);
-        tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; //BREAKS CODE OF GAME MANAGER
+        tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; 
         tempDeathCollider.GetComponent<GameOver>().setup(gameObject);
         GameObject tempWinCollider = (GameObject)Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity);
         tempWinCollider.GetComponent<GameOver>().setup(gameObject);

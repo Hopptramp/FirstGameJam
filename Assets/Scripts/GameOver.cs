@@ -29,23 +29,34 @@ public class GameOver : MonoBehaviour {
 		if (gameObject.tag == "DeathCollider") 
 		{
 
-			if (other.tag == "Bullet") 
-			{
-				Destroy (other.gameObject);
-			}
+            if (other.tag == "Bullet")
+            {
+                Destroy(other.gameObject);
+            }
             else if (other.tag == "Player")
             {
-                m_gameManagerScript.m_state = GameManager.STATE.GAMEOVER;
-                Debug.Log("Player entered destroy collider");
+                if (other.gameObject.GetComponent<PlayerMovement>().playerOne)
+                {
+                    m_gameManagerScript.m_state = GameManager.STATE.WIN2;
+                }
+                else
+                {
+                    m_gameManagerScript.m_state = GameManager.STATE.WIN1;
+                }
             }
 
 		}
 
 		if (gameObject.tag == "VictoryCollider") 
 		{
-			Debug.Log ("Player entered victory collider");
-            m_gameManagerScript.m_state = GameManager.STATE.Win;
-            //victory to player
+            if (other.gameObject.GetComponent<PlayerMovement>().playerOne)
+            {
+                m_gameManagerScript.m_state = GameManager.STATE.WIN1;
+            }
+            else
+            {
+                m_gameManagerScript.m_state = GameManager.STATE.WIN2;
+            }
         }
 			
 	}
