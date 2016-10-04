@@ -5,7 +5,10 @@ public class Enemy : MonoBehaviour {
 
     public GameObject bullet;
     //public GameObject trackShooter;
-    public GameObject player;
+    [SerializeField]
+    public GameObject player1;
+    [SerializeField]
+    public GameObject player2;
 
     [SerializeField]
     public int timeToShoot;
@@ -29,7 +32,7 @@ public class Enemy : MonoBehaviour {
     {
         _rb = GetComponent<Rigidbody2D>();
         flip = true;
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.Find()
         timeToShoot = 200;
     }
 
