@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] float dropSpeed = -2.0f;
 	[SerializeField] float fallSpeed = -10.0f;
 	[SerializeField] float boostedAscendSpeed = 7.0f;
-	[SerializeField] float fallTime = 0.5f;
+	[SerializeField] float fallTime = 1.0f;
+    [SerializeField] float dropTime = 0.5f;
 
 	[SerializeField] GameObject mainCam;
 	[SerializeField] GameObject collisionParticle;
@@ -118,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
 		rb.AddForce(new Vector2(0, - (Mathf.Abs(rb.velocity.y) + Mathf.Abs(dropSpeed))));
         rb.velocity = new Vector2(rb.velocity.x / 4, rb.velocity.y);
 		rb.gravityScale = 2;
-		Invoke ("AllowAscent", fallTime);
+		Invoke ("AllowAscent", dropTime);
 	}
 
 	public void BoostedAscent(bool active)
@@ -136,9 +137,10 @@ public class PlayerMovement : MonoBehaviour
 	{
         canAscend = false;
         //doAscend = false;
-        rb.AddForce(new Vector2(0, fallSpeed));
+        rb.velocity = Vector2.zero;
+        rb.AddForce(new Vector2(0, -(Mathf.Abs(rb.velocity.y) + Mathf.Abs(fallSpeed))));
 		rb.gravityScale = 1;
-		Invoke ("AllowAscent", 2 * fallTime);	
+		Invoke ("AllowAscent", fallTime);	
 	}
 
     void OnTriggerEnter2D(Collider2D _collider)
