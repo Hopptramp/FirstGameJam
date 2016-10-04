@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
 	List<GameObject> currentCollisionParticles;
 	List<GameObject> currentDropParticles;
 
-
 	//bool doAscend = true;
 	bool doBoost = false;
     bool canAscend = true;
@@ -167,18 +166,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-	void OnCollisionEnter2D(Collision2D col)
-	{
-		mainCam.GetComponent<ScreenShake> ().ShakeScreen (0.1f);
-		GameObject particle = Instantiate (collisionParticle) as GameObject;
-		particle.transform.position = col.contacts [0].point;
-		currentCollisionParticles.Add (particle);
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        mainCam.GetComponent<ScreenShake>().ShakeScreen(0.1f);
+        GameObject particle = Instantiate(collisionParticle) as GameObject;
+        particle.transform.position = col.contacts[0].point;
+        currentCollisionParticles.Add(particle);
 
-        if(col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Enemy")
         {
-            FallPlayer();
+            Drop();
         }
-	}
+        else if (col.gameObject.tag == "Mine")
+        {
+            Drop();
+            col.transform.parent.GetComponent<DestroyChildren>().DestroyTheChildren();
+            
+        }
+    }
 
     void OnTriggerExit2D(Collider2D _collider)
     {
