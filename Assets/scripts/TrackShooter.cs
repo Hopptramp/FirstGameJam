@@ -4,6 +4,7 @@ using System.Collections;
 public class TrackShooter : Enemy
 {
     [SerializeField]private float drag = 400.0f;
+    [SerializeField]private GameObject trackedPlayer;
 
     // Update is called once per frame
     void Update()
@@ -48,20 +49,22 @@ public class TrackShooter : Enemy
             flip = false;
         }
 
-        if (player.transform.position.x >= gameObject.transform.position.x) //bounce off the left
+        if (trackedPlayer.transform.position.x >= gameObject.transform.position.x) //bounce off the left
         {
             actualDirection = direction.right;
             //Debug.Log("Bounce off left");
             flip = true;
         }
-        else if (player.transform.position.x <= gameObject.transform.position.x) //bounce off the right
+        else if (trackedPlayer.transform.position.x <= gameObject.transform.position.x) //bounce off the right
         {
             actualDirection = direction.left;
             //Debug.Log("Bounce off right");
             flip = true;
         }
 
-        if (((player.transform.position.x <= gameObject.transform.position.x + 1.0f) && ((player.transform.position.x >= gameObject.transform.position.x - 1.0f))) && (getTimer() >= timeToShoot)) //shoot
+        selectTarget();
+
+        if (((trackedPlayer.transform.position.x <= gameObject.transform.position.x + 1.0f) && ((trackedPlayer.transform.position.x >= gameObject.transform.position.x - 1.0f))) && (getTimer() >= timeToShoot)) //shoot
         {
             setTimer(0);
 
@@ -69,6 +72,22 @@ public class TrackShooter : Enemy
             //Debug.Log("Pew");
             
             flip = false;
+        }
+    }
+
+    void selectTarget() //changes the target of the track shooter based on how high the players are
+    {
+        if (player1.transform.position.y > player2.transform.position.y)
+        {
+            trackedPlayer = player1;
+        }
+        else if(player1.transform.position.y < player2.transform.position.y)
+        {
+            trackedPlayer = player2;
+        }
+        else
+        {
+            //don't change
         }
     }
 

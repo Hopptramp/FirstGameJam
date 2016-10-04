@@ -26,7 +26,7 @@ public class bulletscript : MonoBehaviour {
         }
 	}
 
-    void OnCollisionEnter2D(Collision2D _collision)
+    public void OnCollisionEnter2D(Collision2D _collision)
     {
         if(_collision.gameObject.tag == "Enemy")
         {
@@ -34,22 +34,22 @@ public class bulletscript : MonoBehaviour {
         }
     }
 
-    void setSpeed(float speedToSet)
+    public void setSpeed(float speedToSet)
     {
         speed = speedToSet;
     }
 
-    float getSpeed()
+    public float getSpeed()
     {
         return speed;
     }
 
-    float getTimer()
+    public float getTimer()
     {
         return deathTimer;
     }
 
-    void setTimer(float timerToSet)
+    public void setTimer(float timerToSet)
     {
         deathTimer = timerToSet;
     }
