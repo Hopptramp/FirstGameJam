@@ -57,6 +57,8 @@ public class GameOver : MonoBehaviour {
             {
                 m_gameManagerScript.m_state = GameManager.STATE.WIN2;
             }
+
+            GetComponent<AudioSource>().Play();
         }
 			
 	}

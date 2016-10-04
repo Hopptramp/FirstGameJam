@@ -241,9 +241,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9267c8596e3485242af10a9552ad6b0f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ddcf02f41f0974742a0fca4feb45f3cf, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.728
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -379,6 +379,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1001 &1158006839
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 430582, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 80.90902
+      objectReference: {fileID: 0}
+    - target: {fileID: 430582, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -53.016323
+      objectReference: {fileID: 0}
+    - target: {fileID: 430582, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 55.30899
+      objectReference: {fileID: 0}
+    - target: {fileID: 430582, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430582, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430582, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430582, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 430582, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 178984, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+      propertyPath: m_Name
+      value: newCam (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 178984, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: dbd46d7de73e15f44b6de7b3832eebdc, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1409076141
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,7 +456,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 28e163c74e4c03640af7d021a7aa6e12, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.171
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -12,9 +12,6 @@ public class EnviromentDestroyer : MonoBehaviour {
             Destroy(gameObject);
         }
 
-		if (_collider.gameObject.tag == "Player") 
-		{
-			GetComponent<AudioSource>().Play();
-		}
+		
     }
 }

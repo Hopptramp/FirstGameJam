@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 	//bool doAscend = true;
 	bool doBoost = false;
     bool canAscend = true;
+    bool canCollideSound = true;
 
 	public bool playerOne = true; // Set as false from scene manager for player 2 when instantiating
 	Rigidbody2D rb;
@@ -161,8 +162,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_collider.tag == "RayOfLight")
         {
-            print("in da light");
             BoostedAscent(true);
+            AudioSource source = GetComponent<AudioSource>();
+            source.time = 1;
+            source.Play();
         }
         else if (_collider.tag == "Bullet")
         {
@@ -178,6 +181,14 @@ public class PlayerMovement : MonoBehaviour
         particle.transform.position = col.contacts[0].point;
         currentCollisionParticles.Add(particle);
 
+        if (canCollideSound)
+        {
+            AudioSource source = transform.GetChild(0).GetComponent<AudioSource>();
+            source.Play();
+            canCollideSound = false;
+            Invoke("ResetSound", 1);
+        }
+
         if (col.gameObject.tag == "Enemy")
         {
             Drop();
@@ -190,11 +201,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void ResetSound()
+    {
+        canCollideSound = true;
+    }
+
     void OnTriggerExit2D(Collider2D _collider)
     {
         if (_collider.tag == "RayOfLight")
         {
-            print("out da light");
             BoostedAscent(false);
         }
     }

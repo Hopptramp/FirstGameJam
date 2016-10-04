@@ -9,6 +9,7 @@ public class CameraScript : MonoBehaviour {
     Vector3 newPosition;
 	public float avgHeight;
     public float avgPercentage;
+    public Transform offset;
 
 	List<GameObject> players;
 
@@ -27,23 +28,31 @@ public class CameraScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		float temp = 0;
-		for (int i = 0; i < players.Count; ++i) {
-			temp += players [i].transform.position.y;
-		}
+        float temp = 0;
+        bool isHigh = false;
+        int ID = 0;
+        for (int i = 0; i < players.Count; ++i)
+        {
+            temp += players[i].transform.position.y;
+            if (players[i].transform.position.y > offset.position.y)
+            {
+                isHigh = true;
+                ID = i;
+            }
+        }
 
-		avgHeight = temp / players.Count;
+
+        avgHeight = temp / players.Count;
         avgPercentage = Mathf.InverseLerp(0, 480, avgHeight);
 
 
-		//if (!GetComponent<ScreenShake> ().isShaking) {
-			Vector3 newPosition = new Vector3 (0, speed, 0);
-			transform.parent.Translate (newPosition * Time.deltaTime);
+        Vector3 newPosition = new Vector3(0, speed, 0);
+        transform.parent.Translate(newPosition * Time.deltaTime);
 
-			if (avgHeight > transform.position.y + 10)
-				transform.position = Vector3.Lerp (transform.position, new Vector3 (transform.position.x, avgHeight, transform.position.z), 0.01f);
-		//}
-	}
+        if (isHigh)
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, players[ID].transform.position.y, transform.position.z), 0.01f);
+
+    }
 
     void setSpeed(float newSpeed)
     {

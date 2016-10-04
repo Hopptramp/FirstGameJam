@@ -81,10 +81,10 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119762}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f8df58e9188fb44428e93c9beab684bd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ef725ad99ca656c4789d9fd0c408410f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.25
   m_Pitch: 1
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6de96417dee7f646a32726183ca0114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionSound: {fileID: 8300000, guid: f8df58e9188fb44428e93c9beab684bd, type: 3}
+  CollisionSound: {fileID: 8300000, guid: ef725ad99ca656c4789d9fd0c408410f, type: 3}
 --- !u!198 &19867472
 ParticleSystem:
   m_ObjectHideFlags: 1
