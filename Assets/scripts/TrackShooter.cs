@@ -6,6 +6,11 @@ public class TrackShooter : Enemy
     [SerializeField]private float drag = 400.0f;
     [SerializeField]private GameObject trackedPlayer;
 
+    void Start()
+    {
+        trackedPlayer = player1;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -77,13 +82,16 @@ public class TrackShooter : Enemy
 
     void selectTarget() //changes the target of the track shooter based on how high the players are
     {
+        //Debug.Log("Hit");
         if (player1.transform.position.y > player2.transform.position.y)
         {
             trackedPlayer = player1;
+            //Debug.Log("Switch");
         }
         else if(player1.transform.position.y < player2.transform.position.y)
         {
             trackedPlayer = player2;
+            //Debug.Log("Switch");
         }
         else
         {
