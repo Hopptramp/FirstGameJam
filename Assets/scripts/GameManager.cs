@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour {
     public LevelManager levelScript;
     public STATE m_state;
     public int winScore = 3;
+	public Text player1Score;
+	public Text player2Score;
 
     //private int level = 3;
 
@@ -60,7 +62,7 @@ public class GameManager : MonoBehaviour {
         {
             if (m_state == STATE.WIN1)
             {
-                if (PlayerPrefs.GetInt("Player1Score") == winScore)
+                if (PlayerPrefs.GetInt("Player1Score") == winScore - 1)
                 {
                     PlayerPrefs.SetInt("State", 1);
                     Application.LoadLevel(2);
@@ -80,11 +82,17 @@ public class GameManager : MonoBehaviour {
             }
         }
 
+		if (Application.loadedLevel == 1) 
+		{
+			player1Score.text = "Player 1 Score: " + PlayerPrefs.GetInt ("Player1Score").ToString (); 
+			player2Score.text = "Player 2 Score: " + PlayerPrefs.GetInt ("Player2Score").ToString (); 
+		}
+
         if (Application.loadedLevel != 3)
         {
             if (m_state == STATE.WIN2)
             {
-                if (PlayerPrefs.GetInt("Player2Score") == winScore)
+                if (PlayerPrefs.GetInt("Player2Score") == winScore - 1)
                 {
                     PlayerPrefs.SetInt("State", 2);
                     Application.LoadLevel(3);
@@ -130,8 +138,8 @@ public class GameManager : MonoBehaviour {
         
         
         PlayerPrefs.SetInt("State", 0);
-        PlayerPrefs.SetInt("Player1Score", 1);
-        PlayerPrefs.SetInt("Player2Score", 1);
+        PlayerPrefs.SetInt("Player1Score", 0);
+        PlayerPrefs.SetInt("Player2Score", 0);
 
     }
 }
