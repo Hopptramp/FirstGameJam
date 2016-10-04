@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour {
     {
         _rb = GetComponent<Rigidbody2D>();
         flip = true;
+        player1 = GameObject.Find("Player 1");
+        player2 = GameObject.Find("Player 2");
         //player = GameObject.Find()
         timeToShoot = 200;
     }

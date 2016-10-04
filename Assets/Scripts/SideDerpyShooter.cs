@@ -3,7 +3,13 @@ using System.Collections;
 
 public class SideDerpyShooter : Enemy
 {
-    [SerializeField]public GameObject bullet;
+    [SerializeField]public SideBullet sideBullet;
+    //[SerializeField]
+    //public bool isLeft;
+    void Start()
+    {
+        //setSide(isLeft);
+    }
 
     void Update()
     {
@@ -61,10 +67,11 @@ public class SideDerpyShooter : Enemy
 
     void OnTriggerStay2D(Collider2D _collision)
     {
-
+        //Debug.Log("boop");
 
         if (_collision.gameObject.tag == "Cieling")
         {
+            
 
             if (actualDirection == direction.left)
             {
@@ -83,6 +90,26 @@ public class SideDerpyShooter : Enemy
                 Debug.Log("Error: Derpyshooter hit a wall and couldn't change direction");
             }
         }
+    }
+
+    void fire()
+    {
+        if (timeToShoot != 40) //slowly increases shot rate
+        {
+            timeToShoot = timeToShoot - 10;
+        }
+
+        Vector3 firePort = transform.position;
+        firePort.y = firePort.x - 4;
+        Instantiate(sideBullet, firePort, Quaternion.identity);
+
+    }
+
+    public void setSide(bool side)//true is on left shooting right, false is on right shooting left
+    {
+        //side = false;
+        //isLeft = side;
+        sideBullet.isLeft(side);
     }
 }
 
