@@ -43,13 +43,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   columns: 100
   rows: 300
-  spaceBetween: 2
   barrierCount:
     minimum: 40
     maximum: 50
+  barrierSizeX:
+    minimum: 5
+    maximum: 10
+  barrierSizeY:
+    minimum: 2
+    maximum: 4
   lightCount:
     minimum: 10
     maximum: 15
+  LightSizeX:
+    minimum: 2
+    maximum: 4
+  LightSizeY:
+    minimum: 5
+    maximum: 10
+  minimumBlockHeight: 50
   OuterWall: {fileID: 178694, guid: b5776dd3586d74646858da93d64ac472, type: 2}
   barrier: {fileID: 130026, guid: 2479c9358b27d3148a5d909f0103c5e3, type: 2}
   lightRay: {fileID: 119762, guid: 744b36e1c0837a6498685c9d1ff23a13, type: 2}
@@ -72,9 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelScript: {fileID: 0}
   m_state: 0
-  gameOverCanvasPrefab: {fileID: 22313838, guid: 5ad3e28df4f7fb3458f9c74f0b547fe2,
-    type: 2}
-  gameOverText: {fileID: 11443568, guid: faf3178969ac4fe43bff9f83991369bd, type: 2}
+  winScore: 3
 --- !u!114 &11499554
 MonoBehaviour:
   m_ObjectHideFlags: 1

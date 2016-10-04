@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour
     public Count lightCount = new Count(10, 15);
     public Count LightSizeX = new Count(2, 4);
     public Count LightSizeY = new Count(5, 10);
+    public float minimumBlockHeight = 10;
 
     public GameObject OuterWall;
     public GameObject barrier;
@@ -82,6 +83,76 @@ public class LevelManager : MonoBehaviour
         return randomPosition;
     }
 
+    void LayoutObjectAtRandom(GameObject tile, int minimum, int maximum, int _heightMin, int _heightMax, int _widthMin, int _widthMax)
+    {
+        int objectCount = Random.Range(minimum, maximum + 1);
+
+        for (int i = 0; i < objectCount; i++)
+        {
+            int objectHeight = Random.Range(_heightMin, _heightMax);
+            int objectWidth = Random.Range(_widthMin, _widthMax);
+
+            Vector3 randomPosition = Vector3.zero;
+            do
+            {
+                randomPosition = RandomPosition();
+            } while (randomPosition.y < minimumBlockHeight);
+        
+            CreateClump(tile, randomPosition, objectHeight, objectWidth);
+        }
+    }
+
+    void CreateClump(GameObject tile, Vector3 _currentPosition, int _width, int _height)
+    {
+        if (tile == lightRay)
+        {
+            GameObject holder = Instantiate(RayHolder, new Vector3(_currentPosition.x, _currentPosition.y, 0.0f), Quaternion.identity) as GameObject;
+            holder.GetComponent<BoxCollider2D>().size = new Vector2(_width, _height);
+            holder.GetComponent<BoxCollider2D>().offset = new Vector2(1.5f, (_height / 2) - 0.5f);
+            holder.transform.SetParent(levelHolder);
+        }
+
+        for (int y = 0; y < _height; y++)
+        {
+            //Debug.Log("Loop!");
+            for (int x = 0; x < _width; x++)
+            {
+                Vector3 newPosition = new Vector3(_currentPosition.x + x, _currentPosition.y + y, 0.0f);
+                if(newPosition.x >= 0 && newPosition.x <= columns)
+                {
+                    GameObject instance = Instantiate(tile, newPosition, Quaternion.identity) as GameObject;
+
+                    instance.transform.SetParent(levelHolder);
+                }
+            }
+        }
+    }
+
+
+    public void SetupScene()
+    {
+        LevelSetup();
+        InitialiseList();
+        Instantiate(player, new Vector3((columns / 2) - 6.0f, 30.0f, 0.0f), Quaternion.identity);
+        GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) + 6.0f, 30.0f, 0.0f), Quaternion.identity);
+        player2.GetComponent<PlayerMovement>().playerOne = false;
+        Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity);
+
+        GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3((columns / 2) - 1.0f, 0.0f, 0.0f), Quaternion.identity);
+        tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; 
+        tempDeathCollider.GetComponent<GameOver>().setup(gameObject);
+        GameObject tempWinCollider = (GameObject)Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity);
+        tempWinCollider.GetComponent<GameOver>().setup(gameObject);
+
+        LayoutObjectAtRandom(barrier, barrierCount.minimum, barrierCount.maximum, barrierSizeX.minimum, barrierSizeX.maximum, barrierSizeY.minimum, barrierSizeY.maximum);
+        LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, LightSizeX.minimum, LightSizeX.maximum, LightSizeY.minimum, LightSizeY.maximum);
+
+        EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 50.0f, 0.0f));
+        EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 40.0f, 0.0f));
+        EnemyManager.GetComponent<EnemyManager>().initialiseEnemies();
+    }
+
+
     //bool CheckSurroundings(int _index, int _height, int _width)
     //{
     //    //Debug.Log("Hi!");
@@ -119,67 +190,4 @@ public class LevelManager : MonoBehaviour
 
     //    return true;
     //}
-
-    void LayoutObjectAtRandom(GameObject tile, int minimum, int maximum, int _heightMin, int _heightMax, int _widthMin, int _widthMax)
-    {
-        int objectCount = Random.Range(minimum, maximum + 1);
-
-        for (int i = 0; i < objectCount; i++)
-        {
-            int objectHeight = Random.Range(_heightMin, _heightMax);
-            int objectWidth = Random.Range(_widthMin, _widthMax);
-            Vector3 randomPosition = RandomPosition();
-            CreateClump(tile, randomPosition, objectHeight, objectWidth);
-        }
-    }
-
-    void CreateClump(GameObject tile, Vector3 _currentPosition, int _width, int _height)
-    {
-        if (tile == lightRay)
-        {
-            GameObject holder = Instantiate(RayHolder, new Vector3(_currentPosition.x, _currentPosition.y, 0.0f), Quaternion.identity) as GameObject;
-            holder.GetComponent<BoxCollider2D>().size = new Vector2(_width, _height);
-            holder.GetComponent<BoxCollider2D>().offset = new Vector2(1.5f, (_height / 2) - 0.5f);
-            holder.transform.SetParent(levelHolder);
-        }
-
-        for (int y = 0; y < _height; y++)
-        {
-            //Debug.Log("Loop!");
-            for (int x = 0; x < _width; x++)
-            {
-                Vector3 newPosition = new Vector3(_currentPosition.x + x, _currentPosition.y + y, 0.0f);
-                if(newPosition.x >= 0 && newPosition.x <= columns)
-                {
-                    GameObject instance = Instantiate(tile, newPosition, Quaternion.identity) as GameObject;
-
-                    instance.transform.SetParent(levelHolder);
-                }
-            }
-        }
-    }
-
-
-    public void SetupScene()
-    {
-        LevelSetup();
-        InitialiseList();
-        Instantiate(player, new Vector3((columns / 2) - 6.0f, 1.0f, 0.0f), Quaternion.identity);
-        GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) + 6.0f, 1.0f, 0.0f), Quaternion.identity);
-        player2.GetComponent<PlayerMovement>().playerOne = false;
-        Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 1.0f, -30.0f), Quaternion.identity);
-
-        GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3((columns / 2) - 1.0f, -30.0f, 0.0f), Quaternion.identity);
-        tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; 
-        tempDeathCollider.GetComponent<GameOver>().setup(gameObject);
-        GameObject tempWinCollider = (GameObject)Instantiate(victoryCollider, new Vector3 ((columns / 2) - 1.0f, rows, 0.0f), Quaternion.identity);
-        tempWinCollider.GetComponent<GameOver>().setup(gameObject);
-
-        LayoutObjectAtRandom(barrier, barrierCount.minimum, barrierCount.maximum, barrierSizeX.minimum, barrierSizeX.maximum, barrierSizeY.minimum, barrierSizeY.maximum);
-        LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, LightSizeX.minimum, LightSizeX.maximum, LightSizeY.minimum, LightSizeY.maximum);
-
-        EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 20.0f, 0.0f));
-        EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 10.0f, 0.0f));
-        EnemyManager.GetComponent<EnemyManager>().initialiseEnemies();
-    }
 }

@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 455394}
   - 212: {fileID: 21265064}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 114: {fileID: 11483622}
   - 61: {fileID: 6105600}
   - 50: {fileID: 5042018}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: DerpyShooter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
