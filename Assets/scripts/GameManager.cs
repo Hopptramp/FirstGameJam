@@ -49,6 +49,11 @@ public class GameManager : MonoBehaviour {
             {
                 Application.LoadLevel(1);
             }
+
+			if (Input.GetKeyDown (KeyCode.Return)) 
+			{
+				Application.LoadLevel(4);
+			}
         }
 
         if (Application.loadedLevel != 2)
@@ -98,6 +103,14 @@ public class GameManager : MonoBehaviour {
                 Application.LoadLevel(0);
             }
         }
+
+		if (Application.loadedLevel == 4) 
+		{
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				Application.LoadLevel(1);
+			}
+		}
     }
 
     void ResetPlayerPrefs()

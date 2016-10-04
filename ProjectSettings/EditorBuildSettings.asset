@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Scenes/WinPlayer1Scene.unity
   - enabled: 1
     path: Assets/Scenes/WinPlayer2Scene.unity
+  - enabled: 1
+    path: Assets/Scenes/ControlsScene.unity
