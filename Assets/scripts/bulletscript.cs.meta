@@ -1,11 +1,11 @@
 fileFormatVersion: 2
 guid: b388e00357d84e44f87b939ac85dc8f7
-timeCreated: 1475072758
-licenseType: Pro
+timeCreated: 1475595835
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - bullet: {fileID: 128208, guid: 3955ae0d31c94c541861e87a020b2d59, type: 2}
+  - CollisionSound: {fileID: 8300000, guid: 145ebbeab4bd98e40b23e8bd9c340df2, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

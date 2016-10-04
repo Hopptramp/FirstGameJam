@@ -6,6 +6,8 @@ public class bulletscript : MonoBehaviour {
     float speed = -4.0f;
     float deathTimer = 0.0f;
 
+	public AudioClip CollisionSound;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -33,6 +35,14 @@ public class bulletscript : MonoBehaviour {
             Physics2D.IgnoreCollision(_collision.collider, GetComponent<Collider2D>());
         }
     }
+
+	void OnTriggerEnter2D(Collider2D _collider)
+	{
+		if (_collider.gameObject.tag == "Player") 
+		{
+			GetComponent<AudioSource>().Play();
+		}
+	}
 
     public void setSpeed(float speedToSet)
     {
