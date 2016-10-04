@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour {
             timeToShoot = timeToShoot - 10;
         }
 
-        Vector3 firePort = transform.position;
+        Vector3 firePort = transform.position + new Vector3(0,5);
         firePort.y = firePort.y - 4;
         Instantiate(bullet, firePort, Quaternion.identity);
 
