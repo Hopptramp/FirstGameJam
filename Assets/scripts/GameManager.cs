@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour {
     public enum STATE
     {
         PLAY = 0,
-        GAMEOVER = 1,
-        Win = 2
+        WIN1 = 1,
+        WIN2 = 2
     };
 
     public LevelManager levelScript;
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour {
 
         if (Application.loadedLevel != 2)
         {
-            if (m_state == STATE.GAMEOVER)
+            if (m_state == STATE.WIN1)
             {
                 PlayerPrefs.SetInt("State", 1);
                 Application.LoadLevel(2);
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour {
 
         if (Application.loadedLevel != 3)
         {
-            if (m_state == STATE.Win)
+            if (m_state == STATE.WIN2)
             {
                 PlayerPrefs.SetInt("State", 2);
                 Application.LoadLevel(3);
