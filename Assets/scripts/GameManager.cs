@@ -45,6 +45,21 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		if (Application.loadedLevel != 0) 
+		{
+			if (Input.GetKeyDown (KeyCode.Escape)) 
+			{
+				Application.LoadLevel (0);
+			}
+		} 
+		else 
+		{
+			if (Input.GetKeyDown (KeyCode.Escape)) 
+			{
+				Application.Quit ();
+			}
+		}
+
         if (Application.loadedLevel == 0)
         {
             if (Input.GetKeyDown(KeyCode.Space))
