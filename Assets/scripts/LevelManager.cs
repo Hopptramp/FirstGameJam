@@ -17,6 +17,8 @@ public class LevelManager : MonoBehaviour
             maximum = max;
         }
     }
+    [SerializeField]
+    Gradient backgroundColour;
 
     public int columns = 30;
     public int rows = 200;
@@ -39,6 +41,10 @@ public class LevelManager : MonoBehaviour
 	public GameObject victoryCollider;
     public GameObject EnemyManager;
     public Camera MainCamera;
+
+    Camera myCam;
+
+    ParticleSystem[] fireParticles;
 
     private Transform levelHolder;
     private Transform barrierHolder;
@@ -153,6 +159,25 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        UpdateCamBackground();
+    }
+
+    void UpdateCamBackground()
+    {
+        float avgPercentage = myCam.GetComponent<CameraScript>().avgPercentage;
+        myCam.backgroundColor = backgroundColour.Evaluate(avgPercentage);
+
+        if (avgPercentage > 0.8f)
+        {
+            for (int i = 0; i < fireParticles.Length; ++i)
+            {
+                fireParticles[i].Stop();
+            }
+        }
+    }
+
 
     public void SetupScene()
     {
@@ -163,7 +188,11 @@ public class LevelManager : MonoBehaviour
         GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) + 6.0f, 30.0f, 0.0f), Quaternion.identity);
         player2.GetComponent<PlayerMovement>().playerOne = false;
         player2.gameObject.name = "Player 2";
-        Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity);
+        myCam = Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity) as Camera;
+
+        fireParticles = new ParticleSystem[50];
+        fireParticles = myCam.GetComponentsInChildren<ParticleSystem>();
+
 
         GameObject tempDeathCollider = (GameObject)Instantiate(deathCollider, new Vector3((columns / 2) - 1.0f, 0.0f, 0.0f), Quaternion.identity);
         tempDeathCollider.gameObject.transform.parent = Camera.main.gameObject.transform; 
