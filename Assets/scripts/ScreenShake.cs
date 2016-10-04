@@ -26,7 +26,7 @@ public class ScreenShake : MonoBehaviour {
 
 	public void ShakeScreen(float? shakeSize)
 	{
-		originalCameraPosition = transform.position;
+		originalCameraPosition = transform.localPosition;
 		shakeAmt = shakeSize.HasValue ? (float)shakeSize : testShakeStrength;
 		InvokeRepeating ("CameraShake", 0, .01f);
 		Invoke ("StopShaking", shakeDuration);

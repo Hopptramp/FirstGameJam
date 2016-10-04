@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject victoryCollider;
     public GameObject EnemyManager;
     public GameObject SideEnemeies;
-    public Camera MainCamera;
+    public GameObject MainCamera;
 
     Camera myCam;
 
@@ -189,7 +189,8 @@ public class LevelManager : MonoBehaviour
         GameObject player2 = (GameObject)Instantiate(player, new Vector3((columns / 2) + 6.0f, 30.0f, 0.0f), Quaternion.identity);
         player2.GetComponent<PlayerMovement>().playerOne = false;
         player2.gameObject.name = "Player 2";
-        myCam = Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity) as Camera;
+        GameObject cam = Instantiate(MainCamera, new Vector3((columns / 2) - 1.0f, 30.0f, -30.0f), Quaternion.identity) as GameObject;
+        myCam = cam.GetComponentInChildren<Camera>();
 
         fireParticles = new ParticleSystem[50];
         fireParticles = myCam.GetComponentsInChildren<ParticleSystem>();
