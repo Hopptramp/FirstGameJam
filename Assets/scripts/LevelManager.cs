@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
 
     public int columns = 30;
     public int rows = 200;
+    public bool hardMode = false;
 
     public Count barrierCount = new Count(20, 25);
     public Count barrierSizeX = new Count(5, 10);
@@ -42,6 +43,7 @@ public class LevelManager : MonoBehaviour
     public GameObject EnemyManager;
     public GameObject SideEnemeies;
     public GameObject MainCamera;
+    public GameObject derpy;
 
     Camera myCam;
 
@@ -214,7 +216,14 @@ public class LevelManager : MonoBehaviour
 
         LayoutObjectAtRandom(barrier, barrierCount.minimum, barrierCount.maximum, barrierSizeX.minimum, barrierSizeX.maximum, barrierSizeY.minimum, barrierSizeY.maximum);
         LayoutObjectAtRandom(lightRay, lightCount.minimum, lightCount.maximum, LightSizeX.minimum, LightSizeX.maximum, LightSizeY.minimum, LightSizeY.maximum);
-        LayoutObjectAtRandom(mine, mineCount.minimum, mineCount.maximum, 2, 2, 2, 2);
+        if (PlayerPrefs.GetInt("HardMode") == 0)
+        {
+            LayoutObjectAtRandom(mine, mineCount.minimum, mineCount.maximum, 2, 2, 2, 2);
+        }
+        else
+        {
+            LayoutObjectAtRandom(derpy, 10, 15, 1, 1, 1, 1);
+        }
 
         EnemyManager.GetComponent<EnemyManager>().setDerpyShooterPosition(new Vector3((columns / 2) - 10.0f, 50.0f, 0.0f));
         EnemyManager.GetComponent<EnemyManager>().setTrackShooterPosition(new Vector3((columns / 2) + 10.0f, 50.0f, 0.0f));
