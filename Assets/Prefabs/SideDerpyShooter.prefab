@@ -9,8 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 443390}
   - 61: {fileID: 6103446}
-  - 114: {fileID: 11437582}
   - 50: {fileID: 5070814}
+  - 114: {fileID: 11449840}
   m_Layer: 0
   m_Name: SideDerpyShooter
   m_TagString: Untagged
@@ -54,7 +54,7 @@ Transform:
   m_GameObject: {fileID: 187170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 429586}
   m_Father: {fileID: 0}
@@ -90,7 +90,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
---- !u!114 &11437582
+--- !u!114 &11449840
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -98,10 +98,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 187170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 203f8b8b7a8c09340aefbb6b86868a87, type: 3}
+  m_Script: {fileID: 11500000, guid: 38a7f4474a0c44b46901e404fb9e687b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 198872, guid: 5c4b2070719ba4848861786d4e0d170b, type: 2}
+  bullet: {fileID: 128208, guid: 3955ae0d31c94c541861e87a020b2d59, type: 2}
   player1: {fileID: 0}
   player2: {fileID: 0}
   timeToShoot: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   _rb: {fileID: 0}
   flip: 0
   actualDirection: 0
-  sideBullet: {fileID: 11438744, guid: 5c4b2070719ba4848861786d4e0d170b, type: 2}
+  sideBullet: {fileID: 11438744, guid: 0c17f613c10a970409cd93cc55866ec6, type: 2}
 --- !u!212 &21245636
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SideDerpyShooter : Enemy
 {
-    [SerializeField]public SideBullet sideBullet;
+    public SideBullet sideBullet;
     //[SerializeField]
     //public bool isLeft;
     void Start()
