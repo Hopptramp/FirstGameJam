@@ -142,6 +142,7 @@ public class LevelManager : MonoBehaviour
             holder.transform.SetParent(mineHolder);
             holder.gameObject.AddComponent<DestroyChildren>();
         }
+        holder.tag = "RayOfLight";
 
 
         for (int y = 0; y < _height; y++)
@@ -177,6 +178,12 @@ public class LevelManager : MonoBehaviour
                 fireParticles[i].Stop();
             }
         }
+
+        if (avgPercentage > 0.8f)
+        {
+            myCam.GetComponentInChildren<UnityStandardAssets.ImageEffects.SunShafts>().enabled = true;
+        }
+
     }
 
 

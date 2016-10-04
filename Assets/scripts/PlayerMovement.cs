@@ -41,10 +41,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey(playerOne ? KeyCode.W : KeyCode.I) && !doBoost)
-        {
+       // if (Input.GetKey(playerOne ? KeyCode.W : KeyCode.I) && !doBoost)
+       // {
             ConstantAscent();
-        }
+        //}
         if (Input.GetKey(playerOne ? KeyCode.A : KeyCode.J))
         {
             LeanDirection(-1);
@@ -115,7 +115,11 @@ public class PlayerMovement : MonoBehaviour
 
 	void LeanDirection(float input)
 	{
-		rb.AddForce ( new Vector2(input * leanSpeed, 0));
+        //rb.velocity = new Vector2(0, rb.velocity.y);
+        if((rb.velocity.x > 0 && input == -1) || (rb.velocity.x < 0 && input == 1))
+            rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, 0.05f), rb.velocity.y);
+
+        rb.AddForce ( new Vector2(input * leanSpeed, 0));
 	}
 
 	void Drop()
@@ -157,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_collider.tag == "RayOfLight")
         {
+            print("in da light");
             BoostedAscent(true);
         }
         else if (_collider.tag == "Bullet")
@@ -189,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_collider.tag == "RayOfLight")
         {
+            print("out da light");
             BoostedAscent(false);
         }
     }
