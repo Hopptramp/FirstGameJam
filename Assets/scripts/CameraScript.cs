@@ -6,8 +6,9 @@ public class CameraScript : MonoBehaviour {
     
     public Camera gameCamera;
     public float speed;
-    public Vector3 newPosition;
+    Vector3 newPosition;
 	public float avgHeight;
+    public float avgPercentage;
 
 	List<GameObject> players;
 
@@ -32,6 +33,7 @@ public class CameraScript : MonoBehaviour {
 		}
 
 		avgHeight = temp / players.Count;
+        avgPercentage = Mathf.InverseLerp(0, 480, avgHeight);
 
 
 		if (!GetComponent<ScreenShake> ().isShaking) {
