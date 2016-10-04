@@ -40,8 +40,8 @@ public class ScreenShake : MonoBehaviour {
 			Vector2 quakeAmt = Random.insideUnitSphere * shakeAmt;
 			Vector3 pp = mainCamera.transform.position;
 			pp.x += quakeAmt.x; 
-			pp.y += quakeAmt.y;  
-			mainCamera.transform.position = pp;
+			pp.y += quakeAmt.y;
+            mainCamera.transform.position = pp;
 		}
 	}
 
