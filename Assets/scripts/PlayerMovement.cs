@@ -118,9 +118,10 @@ public class PlayerMovement : MonoBehaviour
 	{
         //rb.velocity = new Vector2(0, rb.velocity.y);
         if((rb.velocity.x > 0 && input == -1) || (rb.velocity.x < 0 && input == 1))
-            rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, 0.05f), rb.velocity.y);
+            rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, 0.2f), rb.velocity.y);
 
         rb.AddForce ( new Vector2(input * leanSpeed, 0));
+        
 	}
 
 	void Drop()

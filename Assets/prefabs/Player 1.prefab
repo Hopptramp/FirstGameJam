@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ascentSpeed: 9
-  leanSpeed: 10
+  leanSpeed: 20
   dropSpeed: -5
   fallSpeed: -40
   boostedAscendSpeed: 18
